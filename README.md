@@ -7,11 +7,11 @@ Yleisiä linkkejä:
 
 ## Työn aihe
 
-### Vanhusten Kohtaamispalvelu
+### Vanhusten Kohtaamispalvelu: "Life For The Oldies"
 
 Palvelu vanhuksille, jonka avulla he voivat tutustua uusiin ystäviin ja järjestää kerhoja ja muita kohtaamiskeinoja. Järjestelmä suunnitellaan "The Oldies" -yhdistykselle, jonka missio on ylläpitää ihmisarvoista ja merkityksellistä elämää sen loppuun saakka.
 
-## Kuvaus järjestelmän toiminnasta :
+### Kuvaus järjestelmän toiminnasta :
 
 - Järjestelmää on tarkoitus käyttää siten, että vanhukset voivat luoda sinne itselleen profiilin, joissa he voivat kertoa itsestään ja elämästään, sekä listata mahdollisia kiinnostuksenkohteitaan. Lisäksi he voivat halutessaan täyttää kalenterista aikoja, jolloin he ovat halukkaita sosiaaliseen toimintaan. 
 
