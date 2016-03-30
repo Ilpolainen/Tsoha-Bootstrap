@@ -22,5 +22,10 @@
     
     public function loginsivu() {
         View::make('Login.html');
+        
+    }
+    
+    public function loginerrorviesti() {
+        View::make('Pelisivu.html');
     }
   }
