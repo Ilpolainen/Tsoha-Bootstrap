@@ -15,3 +15,7 @@
   $routes->get('/pelisivu', function() {
       HelloWorldController::pelisivu(); 
   });
+  
+  $routes->get('/Login', function() {
+      HelloWorldController::loginsivu();
+  });

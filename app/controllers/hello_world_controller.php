@@ -19,4 +19,8 @@
     public function pelisivu() {
         View::make('Pelisivu.html');
     }
+    
+    public function loginsivu() {
+        View::make('Login.html');
+    }
   }

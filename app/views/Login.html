@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3>Login to your Meaning Of Life Account</h3>
+
+<br>
+
+<style>
+    .tab1 {
+        position: absolute;
+        left: 18em;
+    }
+</style>
+
+<style>
+    .tab2 {
+        position: absolute;
+        left: 25em;
+    }
+</style>
+
+
+
+<p>
+    <span class="tab1">username: </span>
+    <input type="text" name="username"  placeholder="User name">
+</p>
+<p>
+    <span class="tab1"> password: </span>   
+    <input type="password" maxlength="10" name="password" placeholder="Password"   
+</p>
+
+
+<p>
+    <button>login</button>
+</p>
+
+
+
+{% endblock %}
