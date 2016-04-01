@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container tapahtuma-container">
+    
+        <h2>Tulevia tapahtumia</h2>
+    
+
+
+
+<br>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Tapahtuman nimi</th>
+            <th>Tapahtumapaikka</th>
+            <th>Lyhyt Kuvaus</th>
+            <th>Tapahtuman järjestäjä</th>
+            <th>Tapahtuma-aika</th>
+            <th>Osallisuminen</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>piirustuskerho</td>
+            <td>pasilan poliisiasema</td>
+            <td>täällä piirretään poliiseja</td>
+            <td>Ilmari Pohjola</td>
+            <td>14.04.2016 18:00</td>
+            <td><label class="label label-success">Osallistun</label></td>
+        </tr>
+    </tbody>
+</table>
+
+
+</div>
+
+{% endblock %}

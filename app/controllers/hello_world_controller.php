@@ -21,11 +21,39 @@
     }
     
     public function loginsivu() {
-        View::make('Login.html');
+        View::make('kirjautuminen.html');
         
     }
     
     public function loginerrorviesti() {
         View::make('Pelisivu.html');
+    }
+    
+    public function signupsivu() {
+        View::make('tilinluonti.html');
+    }
+    
+    public function tapahtumasivu() {
+        View::make ('tapahtumasivu.html');
+    }
+    
+    public function etusivu() {
+        View::make('etusivu.html');
+    }
+    
+    public function kiinnostussivu() {
+        View::make('kiinnostukset.html');
+    }
+    
+    public function luokiinnostus() {
+        View::make('kiinnostuksenluonti.html');
+    }
+    
+    public function luotapahtuma() {
+        View::make('tapahtumanluonti.html');
+    }
+    
+    public function kayttajienlistaus() {
+        View::make('kayttajienlistaus.html');
     }
   }

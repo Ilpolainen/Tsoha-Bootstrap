@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div class="container kirjautumis-container">
+    <br>
+
+    
+
+    <div class="container" >   
+        <form>
+            <div class="form-group">
+                <div class="col-xs-3">
+                    <p>
+                    <h2>Kirjaudu Sisään</h2>
+                    </p>
+                    <p>
+                        <label>Käyttäjätunnus:</label>
+                        <input type="text" class="form-control" name="kayttajatunnus"  placeholder="Käyttäjätunnus">
+                    </p>
+                    <p>
+                        <label >Salasana:</label>   
+                        <input type="password" class="form-control" size="10" maxlength="10" name="salasana" placeholder="Salasana"   
+                    </p>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+
+
+    <div class="container">
+        <div class="col-xs-2">
+            <form>
+                <div class="form-group">
+                    <div>
+                        <button  type="submit" class="btn btn-group-lg"><b>Kirjaudu sisään</b></button>
+                    </div>
+                </div>
+            </form>
+            <form>
+                <div class="form-group">
+                    <div>
+                        <text>Eikö sinulla vielä ole tiliä? Luo tästä uusi:</text><br><br>
+                        <button  type="submit" class="btn btn-primary">Luo käyttäjätili</button> 
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>
+
+
+
+
+
+
+
+{% endblock %}

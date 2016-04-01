@@ -20,7 +20,7 @@
     {% endblock %}
   </head>
 
-  <body>
+  <body class="container-fluid">
 
     <nav class="navbar navbar-default" role="navigation">
       <div class="container-fluid">
@@ -33,19 +33,25 @@
             <span class="icon-bar"></span>
           </button>
           <!-- Sovelluksen nimi -->
-          <a class="navbar-brand" href="{{base_path}}">Tsoha Bootstrap</a>
+          <a class="navbar-brand" href="{{base_path}}/etusivu">Etusivu</a>
         </div>
 
         <div class="collapse navbar-collapse" id="navigation">
           <ul class="nav navbar-nav">
             <!-- Navigaation linkit -->
-            <li><a href="{{base_path}}">Etusivu</a></li>
+            <li><a href="{{base_path}}/kirjautuminen">kirjaudu sisään</a></li>
+            <li><a href="{{base_path}}/tilinluonti">luo tili</a></li>
+            <li><a href="{{base_path}}/tapahtumasivu">tapahtumasivu</a></li>
+            <li><a href="{{base_path}}/kiinnostukset">kiinnostukset</a></li>
+            <li><a href="{{base_path}}/kiinnostuksenluonti">luo kiinnostus</a></li>
+            <li><a href="{{base_path}}/tapahtumanluonti">luo tapahtuma</a></li>
+            <li><a href="{{base_path}}/kayttajienlistaus">käyttäjät</a></li>
           </ul>
         </div>
       </div>
     </nav>
 
-    <div id="main-container">
+    <div>
       <!-- Dynaaminen sisältö tulee tähän -->
       {% block content %}{% endblock %}
     </div>

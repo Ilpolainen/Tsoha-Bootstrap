@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container luonti-container">
+    <br>
+    <div class="container">
+        <form>
+            <div class="form-group">
+                <div class="col-xs-5">
+                    
+                    <h2>Luo Tili:</h2>
+                    
+
+                    <p>
+                        <label>Etunimi:</label>
+                        <input type="text" class="form-control" placeholder="Etunimi">
+                    </p>
+                    <p>
+                        <label>Sukunimi:</label>
+                        <input class="form-control" placeholder="Sukunimi">
+                    </p>
+                    <p>
+                        <label>Sähköposti:</label>
+                        <input class="form-control" placeholder="matti.meikalainen@roskaposti.fi">
+                    </p>
+                    <p>
+                        <label>Käyttäjätunnus:</label>
+                        <input class="form-control" placeholder="Käyttäjätunnus">
+                    </p>
+                    <p>
+                        <label>Salasana:</label>
+                        <input class="form-control" type="password" placeholder="Salasana">
+                    </p>
+                    <p>
+                        <label>Salasana uudelleen:</label>
+                        <input class="form-control" type="password" placeholder="Salasana">
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+    <br>
+    <div class="container">
+        <div class="form-group">
+            <div class="col-xs-5">
+                <form>
+                    <div class="form-group">
+                        <div>
+                            <button type="submit" class="btn btn-primary">Luo Tili</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+
+    {% endblock %}
+

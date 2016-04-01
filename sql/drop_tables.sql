@@ -1,1 +1,6 @@
--- Lisää DROP TABLE lauseet tähän tiedostoon
+DROP TABLE IF EXISTS Tapahtuma CASCADE; 
+DROP TABLE IF EXISTS Kayttaja CASCADE;
+DROP TABLE IF EXISTS Osallistuminen CASCADE;
+DROP TABLE IF EXISTS Kiinnostustagi CASCADE;
+DROP TABLE IF EXISTS Taphtuman_aihe CASCADE;
+
