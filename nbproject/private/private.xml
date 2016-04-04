@@ -5,26 +5,26 @@
         <group>
             <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/assets/css/site.css</file>
             <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/tapahtumanluonti.html</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/kirjautuminen.html</file>
             <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/etusivu.html</file>
+            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/kirjautuminen.html</file>
+            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/julkinenprofiili.html</file>
             <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/tapahtumasivu.html</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/index.php</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/base.html</file>
+            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/profiilinmuokkaus.html</file>
             <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/kiinnostuksenluonti.html</file>
+            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/base.html</file>
             <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/sql/add_test_data.sql</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/config/database.php</file>
             <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/controllers/hello_world_controller.php</file>
+            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/omasivu.html</file>
             <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/sql/create_tables.sql</file>
             <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/Helloworld.html</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/bootstrap.sh</file>
             <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/config/routes.php</file>
             <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/kiinnostukset.html</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/tilinluonti.html</file>
             <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/home.html</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/pictures/aaa.jpg</file>
+            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/tilinluonti.html</file>
+            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/tapahtumanmuokkaus.html</file>
             <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/sql/drop_tables.sql</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/Pelisivu.html</file>
             <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/kayttajienlistaus.html</file>
+            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/Pelisivu.html</file>
         </group>
     </open-files>
 </project-private>

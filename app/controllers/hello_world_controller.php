@@ -4,7 +4,7 @@
 
     public static function index(){
       // make-metodi renderöi app/views-kansiossa sijaitsevia tiedostoja
-   	echo 'Cool!';
+      View::make('etusivu.html');
     }
 
     public static function sandbox(){
@@ -33,6 +33,14 @@
         View::make('tilinluonti.html');
     }
     
+     public function naytaomasivu() {
+        View::make('omasivu.html');
+    }
+    
+     public function muokkaaprofiilia() {
+        View::make('profiilinmuokkaus.html');
+    }
+    
     public function tapahtumasivu() {
         View::make ('tapahtumasivu.html');
     }
@@ -53,7 +61,16 @@
         View::make('tapahtumanluonti.html');
     }
     
+     public function muokkaatapahtumaa() {
+        View::make('tapahtumanmuokkaus.html');
+    }
+    
     public function kayttajienlistaus() {
         View::make('kayttajienlistaus.html');
     }
+    
+    public function julkinenprofiili() {
+        View::make('julkinenprofiili.html');
+    }
+    
   }
