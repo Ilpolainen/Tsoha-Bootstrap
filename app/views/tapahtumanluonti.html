@@ -4,72 +4,45 @@
 <div class="container luonti-container">
     <br>
     <div class="container">
-        <form>
+        <form method="post" action="{{base_path}}/tapahtumanluonti">
             <div class="form-group">
                 <div class="col-xs-5">
 
                     <h2>Luo Tapahtuma:</h2>
 
                     <br>
-                    
+
 
                     <p>
                         <label>Tapahtuman nimi:</label>
-                        <input class="form-control" placeholder="tapahtuman nimi">
+                        <input class="form-control" name="tapahtuman_nimi" placeholder="tapahtuman nimi">
                     </p>
 
                     <p>
                         <label>Tapahtuma-Paikka:</label>
-                        <input class="form-control" placeholder="muodossa: 12.2.1972 13:45"> 
+                        <input class="form-control" name="tapahtumapaikka" placeholder="tapahtumapaikka"> 
                     </p>
 
                     <p>
-                        <label>Tapahtuma-aika:</label>
-                        <input class="form-control" placeholder="muodossa: 12.2.1972 13:45">
+                        <label>Päivämäärä:</label>
+                        <input class="form-control" name="pvm" placeholder="muodossa: 12.02.1972">
                     </p>
-
+                    <p>
+                        <label>Kellonaika:</label>
+                        <input class="form-control" name="kellonaika" placeholder="muodossa: 14:00">
+                    </p>
+                    <p>
+                        <label>Lyhyt kuvaus:</label>
+                        <textarea class="form-control" name="lyhyt_kuvaus">                                
+                        </textarea>
+                    </p>
+                    <p>
+                        <button type="submit" class="btn btn-primary">Luo Tapahtuma</button>
+                    </p>
                 </div>
             </div>
         </form>
     </div>
     <br>
-
-    <div class="container">
-        <div class="form-group">
-            <div class="col-xs-8">
-                <form>
-                    <div class="form-group">
-                        <div>
-                            <label>Lyhyt kuvaus:</label>
-                            <textarea class="form-control">                                
-                            </textarea>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <br>
-        <br>
-        <br>
-        <br>
-    </div>
-
-    <div class="container">
-        <div class="form-group">
-            <div class="col-xs-5">
-                <form>
-                    <div class="form-group">
-                        <div>
-                            <button type="submit" class="btn btn-primary">Luo Tapahtuma</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <br>
-        <br>
-        <br>
-        <br>
-    </div>
 
     {% endblock %}

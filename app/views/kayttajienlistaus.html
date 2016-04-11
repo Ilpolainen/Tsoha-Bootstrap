@@ -17,10 +17,12 @@
         </tr>
     </thead>
     <tbody>
+        {% for kayttaja in kayttajat %}
         <tr>
-            <td>Ilmari Pohjola</td>
+            <td>{{kayttaja.kayttajatunnus}}</td>
             <td><button class="btn btn-primary">Profiili</button></td>
         </tr>
+        {% endfor %}
     </tbody>
 </table>
 

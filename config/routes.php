@@ -1,19 +1,13 @@
 <?php
 
+
 $routes->get('/', function() {
     HelloWorldController::index();
 });
 
-$routes->get('/hiekkalaatikko', function() {
-    HelloWorldController::sandbox();
-});
 
 $routes->get('/hello', function() {
     HelloWorldController::hello();
-});
-
-$routes->get('/pelisivu', function() {
-    HelloWorldController::pelisivu();
 });
 
 $routes->get('/kirjautuminen', function() {
@@ -32,10 +26,6 @@ $routes->get('/profiilinmuokkaus', function() {
     HelloWorldController::muokkaaprofiilia();
 });
 
-$routes->get('/tapahtumasivu', function () {
-    HelloWorldController::tapahtumasivu();
-});
-
 $routes->get('/etusivu', function() {
     HelloWorldController::etusivu();
 });
@@ -48,20 +38,31 @@ $routes->get('/kiinnostuksenluonti', function() {
     HelloWorldController::luokiinnostus();
 });
 
-$routes->get('/tapahtumanluonti', function() {
-    HelloWorldController::luotapahtuma();
-});
-
-$routes->get('/tapahtumanmuokkaus', function() {
-    HelloWorldController::muokkaatapahtumaa();
-});
-
 $routes->get('/kayttajienlistaus', function() {
-    HelloWorldController::kayttajienlistaus();
+    KayttajaController::index();
 });
 
 $routes->get('/julkinenprofiili', function() {
     HelloWorldController::julkinenprofiili();
 });
+
+$routes->get('/tapahtumat', function () {
+    TapahtumaController::naytaTapahtumasivu();
+});
+
+$routes->get('/tapahtumanluonti', function() {
+    TapahtumaController::naytaTapahtumanluontisivu();
+});
+
+$routes->post('/tapahtumanluonti', function() {
+    TapahtumaController::luoUusiTapahtuma();
+});
+
+$routes->get('/tapahtumanmuokkaus', function() {
+    TapahtumaController::naytaTapahtumanmuokkaussivu();
+});
+
+
+
 
 

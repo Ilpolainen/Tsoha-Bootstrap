@@ -16,10 +16,6 @@
         View::make('Helloworld.html');
     }
     
-    public function pelisivu() {
-        View::make('Pelisivu.html');
-    }
-    
     public function loginsivu() {
         View::make('kirjautuminen.html');
         
@@ -41,9 +37,6 @@
         View::make('profiilinmuokkaus.html');
     }
     
-    public function tapahtumasivu() {
-        View::make ('tapahtumasivu.html');
-    }
     
     public function etusivu() {
         View::make('etusivu.html');
@@ -57,13 +50,9 @@
         View::make('kiinnostuksenluonti.html');
     }
     
-    public function luotapahtuma() {
-        View::make('tapahtumanluonti.html');
-    }
     
-     public function muokkaatapahtumaa() {
-        View::make('tapahtumanmuokkaus.html');
-    }
+    
+   
     
     public function kayttajienlistaus() {
         View::make('kayttajienlistaus.html');

@@ -15,20 +15,22 @@
             <th>Tapahtuman nimi</th>
             <th>Tapahtumapaikka</th>
             <th>Lyhyt Kuvaus</th>
-            <th>Tapahtuman järjestäjä</th>
+            
             <th>Tapahtuma-aika</th>
-            <th>Osallisuminen</th>
+            <th>Osallistuminen</th>
         </tr>
     </thead>
     <tbody>
+        {% for tapahtuma in tapahtumat %}
         <tr>
-            <td>piirustuskerho</td>
-            <td>pasilan poliisiasema</td>
-            <td>täällä piirretään poliiseja</td>
-            <td>Ilmari Pohjola</td>
-            <td>14.04.2016 18:00</td>
+            <td>{{tapahtuma.tapahtuman_nimi}}</td>
+            <td>{{tapahtuma.tapahtumapaikka}}</td>
+            <td>{{tapahtuma.lyhyt_kuvaus}}</td>
+         
+            <td>{{tapahtuma.pvm}} , {{tapahtuma.kellonaika}}</td>
             <td><label class="label label-success">Osallistun</label></td>
         </tr>
+        {% endfor %}
     </tbody>
 </table>
 
