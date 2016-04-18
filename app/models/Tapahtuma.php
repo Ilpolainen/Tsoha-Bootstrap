@@ -17,8 +17,8 @@ class Tapahtuma extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = array('validateTapahtumannimi', 'validatePvm', 'validateKellonaika');
     }
-
 
     public static function findAll() {
         $query = DB::connection()->prepare('SELECT * FROM tapahtuma');
@@ -54,7 +54,7 @@ class Tapahtuma extends BaseModel {
                 'tapahtumapaikka' => $row['tapahtumapaikka'],
             ));
         }
-        return $tagi;
+        return $tapahtuma;
     }
 
     public function tallenna() {
@@ -63,6 +63,54 @@ class Tapahtuma extends BaseModel {
         $row = $query->fetch();
         $this->id = $row['id'];
     }
+    
+    public function update() {
+        $query = DB::connection()->prepare('UPDATE Tapahtuma SET tapahtuman_nimi = :tapahtuman_nimi, lyhyt_kuvaus = :lyhyt_kuvaus, pvm = :pvm, kellonaika = :kellonaika, tapahtumapaikka = :tapahtumapaikka WHERE id = :id');
+        $query->execute(array('tapahtuman_nimi' => $this->tapahtuman_nimi, 'lyhyt_kuvaus' => $this->lyhyt_kuvaus, 'pvm' => $this->pvm, 'kellonaika' => $this->kellonaika, 'tapahtumapaikka' => $this->tapahtumapaikka));
+    }
+    
+    public function poista() {
+        $query = DB::connection()->prepare('DELETE FROM Tapahtuma WHERE id = :id');
+        $query->execute(array('id' => $this->id));
+    }
+
+    public function validateTapahtumannimi() {
+        $errors = array();
+        if (!$this->validate_string_length($this->tapahtuman_nimi, 3)) {
+            $errors[] = 'Tapahtumannimen tulee olla vähintään 3 merkkiä pitkä';
+        }
+        return $errors;
+    }
+
+    public function validatePvm() {
+        $errors = array();
+        if (!$this->validate_string_length($this->pvm, 1)) {
+            $errors[] = 'Päivämäärä ei saa olla tyhjä!';
+        } else {
+            if (!$this->checkIfDate($this->pvm)) {
+                $errors[] = 'Päivämäärä ei ole muotoa DD-MM-YYYY!';
+            }
+        }
+        return $errors;
+    }
+    
+    public function validateKellonaika() {
+        $errors = array();
+        if (!$this->validate_string_length($this->kellonaika, 1)) {
+            $errors[] = 'Kellonaika ei saa olla tyhjä!';
+        } else {
+            if (!$this->checkIfTime($this->kellonaika)) {
+                $errors[] = 'Kellonaika ei ole muotoa MM:HH!';
+            }
+        }
+        return $errors;
+    }
+    
+    
+    
+    
+    
+    
 
     public static function findByParams($params) {
         foreach ($params as $par) {

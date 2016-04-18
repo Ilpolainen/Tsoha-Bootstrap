@@ -1,0 +1,10 @@
+{% macro poista_nappi() %}
+  <form method="post" action="{{base_path}}/tapahtumanpoisto/{{tapahtuma.id}}" style="display: inline-block;">
+    <button type="submit" class="btn btn-danger">Poista</button>
+  </form>
+{% endmacro %}
+{% macro muokkaa_nappi() %}
+  <form method="post" action="{{base_path}}/tapahtumanmuokkaus/{{tapahtuma.id}}" style="display: inline-block;">
+    <button type="submit" class="btn btn-danger">Hyväksy muutokset</button>
+  </form>
+{% endmacro %}

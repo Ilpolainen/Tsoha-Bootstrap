@@ -12,7 +12,7 @@
  * @author vipohjol
  */
 class TapahtumaController {
-    
+
     public static function luoUusiTapahtuma() {
         $params = $_POST;
 
@@ -23,25 +23,65 @@ class TapahtumaController {
             'pvm' => $params['pvm'],
             'kellonaika' => $params['kellonaika']
         ));
-        
+
         $tapahtuma->tallenna();
-        
-         Redirect::to('/tapahtumat', array('message' => 'Taphtuma lisättiin onnistuneesti!'));
+
+        Redirect::to('/tapahtumat', array('message' => 'Tapahtuma lisättiin onnistuneesti!'));
     }
-    
-    public function naytaTapahtumasivu() {
-        $tapahtumat = Tapahtuma::findAll();    
-         View::make('tapahtumat.html', array('tapahtumat' => $tapahtumat));
+
+    public static function naytaTapahtumasivu() {
+        $tapahtumat = Tapahtuma::findAll();
+        View::make('tapahtumat.html', array('tapahtumat' => $tapahtumat));
     }
-    
-    public function naytaTapahtumanluontisivu() {
+
+    public static function naytaTapahtumanluontisivu() {
         View::make('tapahtumanluonti.html');
     }
 
+  
 
-    public function naytaTapahtumanmuokkaussivu() {
-        View::make('tapahtumanmuokkaus.html');
+    public static function editoiTapahtumaa($id) {
+        $tapahtuma = Tapahtuma::find($id);
+        View::make('tapahtumanmuokkaus.html', array('attribuutit' => $tapahtuma));
     }
-   
-    //put your code here
+
+    public static function update($id) {
+        $parametrit = $_POST;
+
+        $attribuutit = array(
+            'id' => $id,
+            'tapahtuman_nimi' => $parametrit['tapahtuman_nimi'],
+            'lyhyt_kuvaus' => $parametrit['lyhyt_kuvaus'],
+            'pvm' => $parametrit['pvm'],
+            'kellonaika' => $parametrit['tapahtumapaikka'],
+            'description' => $parametrit['description']
+        );
+
+        // Alustetaan Game-olio käyttäjän syöttämillä tiedoilla
+        $tapahtuma = new Tapahtuma($attribuutit);
+        $virheet = $tapahtuma->errors();
+        
+        if (count($virheet) > 0) {
+            View::make('tapahtumanmuokkaus.html', array('virheet' => $virheet, 'attribuutit' => $attribuutit));
+        } else {
+            // Kutsutaan alustetun olion update-metodia, joka päivittää pelin tiedot tietokannassa
+            $tapahtuma->update();
+
+            Redirect::to('/tapahtumat', array('message' => 'Tapahtumaa on muokattu onnistuneesti!'));
+        }
+    }
+
+    public static function poista($id) {
+        // Alustetaan Game-olio annetulla id:llä
+        $tapahtuma = new Tapahtuma(array('id' => $id));
+        // Kutsutaan Game-malliluokan metodia destroy, joka poistaa pelin sen id:llä
+        $tapahtuma->poista();
+
+        // Ohjataan käyttäjä pelien listaussivulle ilmoituksen kera
+        Redirect::to('/tapahtumat', array('message' => 'Tapahtuma on poistettu onnistuneesti!'));
+    }
+
 }
+
+//put your code here
+

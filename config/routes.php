@@ -2,20 +2,20 @@
 
 
 $routes->get('/', function() {
-    HelloWorldController::index();
+    HelloWorldController::naytaEtusivu();
 });
 
-
-$routes->get('/hello', function() {
-    HelloWorldController::hello();
-});
 
 $routes->get('/kirjautuminen', function() {
-    HelloWorldController::loginsivu();
+    HelloWorldController::naytaKirjautumislomake();
 });
 
 $routes->get('/tilinluonti', function() {
-    HelloWorldController::signupsivu();
+    KayttajaController::naytaTilinluontilomake();
+});
+
+$routes->post('/tilinluonti', function() {
+    KayttajaController::luoTili();
 });
 
 $routes->get('/omasivu', function() {
@@ -27,11 +27,11 @@ $routes->get('/profiilinmuokkaus', function() {
 });
 
 $routes->get('/etusivu', function() {
-    HelloWorldController::etusivu();
+    HelloWorldController::naytaEtusivu();
 });
 
 $routes->get('/kiinnostukset', function() {
-    HelloWorldController::kiinnostussivu();
+    KiinnostusController::naytaKiinnostustagit();
 });
 
 $routes->get('/kiinnostuksenluonti', function() {
@@ -39,7 +39,7 @@ $routes->get('/kiinnostuksenluonti', function() {
 });
 
 $routes->get('/kayttajienlistaus', function() {
-    KayttajaController::index();
+    KayttajaController::naytaKayttajat();
 });
 
 $routes->get('/julkinenprofiili', function() {
@@ -58,11 +58,33 @@ $routes->post('/tapahtumanluonti', function() {
     TapahtumaController::luoUusiTapahtuma();
 });
 
-$routes->get('/tapahtumanmuokkaus', function() {
-    TapahtumaController::naytaTapahtumanmuokkaussivu();
+
+$routes->get('/tapahtumanmuokkaus/:id/', function($id){
+  // Pelin muokkauslomakkeen esittäminen
+  TapahtumaController::editoiTapahtumaa($id);
+});
+$routes->post('/tapahtumanmuokkaus/:id/', function($id){
+  // Pelin muokkaaminen
+  TapahtumaController::editoiTapahtumaa($id);
 });
 
+$routes->post('/tapahtumanpoisto/:id/', function($id){
+  // Pelin poisto
+  TapahtumaController::poista($id);
+});
 
+$routes->get('/hiekkalaatikko', function() {
+    HelloWorldController::sandbox();
+});
+
+$routes->get('/kirjautuminen', function(){
+  // Kirjautumislomakkeen esittäminen
+  KayttajaController::login();
+});
+$routes->post('/kirjautuminen', function(){
+  // Kirjautumisen käsittely
+  KayttajaController::handle_login();
+});
 
 
 

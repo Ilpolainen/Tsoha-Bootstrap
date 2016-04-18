@@ -55,5 +55,7 @@ class Kayttajan_kiinnostus extends BaseModel {
         return $kayttajien_kiinnostukset;
     }
 
+   
+
     //put your code here
 }

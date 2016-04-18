@@ -29,6 +29,9 @@
          
             <td>{{tapahtuma.pvm}} , {{tapahtuma.kellonaika}}</td>
             <td><label class="label label-success">Osallistun</label></td>
+            <td>
+                <a href="{{base_path}}/tapahtumanmuokkaus/{{tapahtuma.id}}" class="btn btn-default">Muokkaa</a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>

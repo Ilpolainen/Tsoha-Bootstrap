@@ -4,84 +4,59 @@
 <div class="container luonti-container">
     <br>
     <div class="container">
-        <form>
+        <form method="post" action="{{base_path}}/tilinluonti">
             <div class="form-group">
                 <div class="col-xs-5">
-                    
+
                     <h2>Luo Tili:</h2>
-                    
+
 
                     <p>
                         <label>Etunimi:</label>
-                        <input type="text" class="form-control" placeholder="Etunimi">
+                        <input class="form-control" name="etunimi"  placeholder="Etunimi">
                     </p>
                     <p>
                         <label>Sukunimi:</label>
-                        <input class="form-control" placeholder="Sukunimi">
-                    </p>
-                    <p>
-                        <label>Syntmä-aika:</label>
-                        <input class="form-control" placeholder="Sukunimi">
-                    </p>
-                    <p>
-                        <label>Sähköposti:</label>
-                        <input class="form-control" placeholder="matti.meikalainen@roskaposti.fi">
+                        <input class="form-control" name="sukunimi" placeholder="Sukunimi">
                     </p>
                     <p>
                         <label>Käyttäjätunnus:</label>
-                        <input class="form-control" placeholder="Käyttäjätunnus">
+                        <input class="form-control" name="kayttajatunnus" placeholder="Käyttäjätunnus">
                     </p>
+                    
                     <p>
                         <label>Salasana:</label>
-                        <input class="form-control" type="password" placeholder="Salasana">
+                        <input class="form-control" name="salasana" type="password" placeholder="Salasana">
                     </p>
                     <p>
                         <label>Salasana uudelleen:</label>
-                        <input class="form-control" type="password" placeholder="Salasana">
+                        <input class="form-control" name="salasana2"  type="password" placeholder="Salasana">
+                    </p>
+                    <p>
+                        <label>Syntymä-aika:</label>
+                        <input class="form-control" name="syntyma_aika" placeholder="Syntymä-aika">
+                    </p>
+                    <p>
+                        <label>Osoite:</label>
+                        <input class ="form-control" name="osoite" placeholder="Osoite">
+                    </p>
+                    <p>
+                        <label>Puhelinnumero:</label>
+                        <input class="form-control" name ="puhelinnumero" placeholder="Puhelinnumero">
+                    </p>
+                    <p>
+                        <label>Sähköposti:</label>
+                        <input class="form-control" name="email_osoite" placeholder="matti.meikalainen@roskaposti.fi">
+                    </p>
+                    <p>
+                        <button type="submit" class="btn btn-primary">Luo Tili</button>
                     </p>
                 </div>
             </div>
         </form>
     </div>
     <br>
-    
-     <div class="container">
-        <div class="form-group">
-            <div class="col-xs-8">
-                <form>
-                    <div class="form-group">
-                        <div>
-                            <label>Lyhyt kuvaus itsestäsi:</label>
-                            <textarea class="form-control">                                
-                            </textarea>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <br>
-        <br>
-        <br>
-        <br>
-    </div>
-    
-    <div class="container">
-        <div class="form-group">
-            <div class="col-xs-5">
-                <form>
-                    <div class="form-group">
-                        <div>
-                            <button type="submit" class="btn btn-primary">Luo Tili</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <br>
-        <br>
-        <br>
-        <br>
-    </div>
+
 
     {% endblock %}
 

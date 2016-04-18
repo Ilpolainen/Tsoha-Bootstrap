@@ -8,8 +8,7 @@ salasana varchar(16) NOT NULL,
 syntyma_aika DATE,
 osoite varchar(60),
 puhelinnumero varchar(15),
-email_osoite varchar(50),
-lyhyt_kuvaus varchar(255)
+email_osoite varchar(50)
 );
 
 
@@ -45,5 +44,5 @@ CREATE TABLE Kayttajan_kiinnostus (
 id SERIAL PRIMARY KEY,
 kayttaja INTEGER NOT NULL,
 kiinnostus INTEGER NOT NULL
-)
+);
 

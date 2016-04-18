@@ -1,75 +1,74 @@
 {% extends "base.html" %}
 {% block content %}
 
+
+
+
 <div class="container luonti-container">
     <br>
     <div class="container">
         <form>
             <div class="form-group">
                 <div class="col-xs-5">
-
-                    <h2>Muokkaa Tapahtumaa:</h2>
+                    <h1>{{attribuutit.tapahtuman_nimi}}</h1>
 
                     <br>
-                    
+
+                    <h3>Muokkaa Tapahtumaa:</h3>
+
+                    <br>
+
 
                     <p>
                         <label>Tapahtuman nimi:</label>
-                        <input class="form-control" placeholder="tapahtuman nimi">
+                        <input class="form-control" placeholder="{{attribuutit.tapahtuman_nimi}}">
                     </p>
-
+                    <p>
+                        <label>Päivämäärä:</label>
+                        <input class="form-control" placeholder="{{attribuutit.pvm}}">
+                    </p>
+                    <p>
+                        <label>Kellonaika:</label>
+                        <input class="form-control" placeholder="{{attribuutit.kellonaika}}">
+                    </p>
                     <p>
                         <label>Tapahtuma-Paikka:</label>
-                        <input class="form-control" placeholder="muodossa: 12.2.1972 13:45"> 
+                        <input class="form-control" placeholder="{{attribuutit.tapahtumapaikka}}"> 
                     </p>
-
                     <p>
-                        <label>Tapahtuma-aika:</label>
-                        <input class="form-control" placeholder="muodossa: 12.2.1972 13:45">
+                        <label>Lyhyt kuvaus:</label>
+                        <input class="form-control" placeholder="{{attribuutit.lyhyt_kuvaus}}">
                     </p>
+                    <p>
+                        <!-- Poistopainike tulee tähän -->
 
+                    </p>
+                </div>
+            </div>
+        </form>
+        <br>
+        <form>
+            <div class="form-group">
+                <div class="col-xs-5">
+                    <form method="post" action="{{base_path}}/tapahtumanmuokkaus/{{attribuutit.id}}" style="display: inline-block;">
+                        <button type="submit" class="btn btn-primary">Hyväksy muutokset</button>
+                    </form>
+                    <br>
+                    <form method="post" action="{{base_path}}/tapahtumanpoisto/{{attribuutit.id}}" style="display: inline-block;">
+                        <button type="submit" class="btn btn-danger">Poista</button>
+                    </form>
                 </div>
             </div>
         </form>
     </div>
+
     <br>
 
-    <div class="container">
-        <div class="form-group">
-            <div class="col-xs-8">
-                <form>
-                    <div class="form-group">
-                        <div>
-                            <label>Lyhyt kuvaus:</label>
-                            <textarea class="form-control">                                
-                            </textarea>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <br>
-        <br>
-        <br>
-        <br>
-    </div>
 
-    <div class="container">
-        <div class="form-group">
-            <div class="col-xs-5">
-                <form>
-                    <div class="form-group">
-                        <div>
-                            <button type="submit" class="btn btn-primary">Luo Tapahtuma</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <br>
-        <br>
-        <br>
-        <br>
-    </div>
+
+
+
+
+
 
     {% endblock %}
