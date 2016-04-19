@@ -49,7 +49,7 @@ class Tapahtuma extends BaseModel {
             $tapahtuma = new Tapahtuma(array('id' => $row['id'],
                 'tapahtuman_nimi' => $row['tapahtuman_nimi'],
                 'lyhyt_kuvaus' => $row['lyhyt_kuvaus'],
-                '$pvm' => $row['pvm'],
+                'pvm' => $row['pvm'],
                 'kellonaika' => $row['kellonaika'],
                 'tapahtumapaikka' => $row['tapahtumapaikka'],
             ));
@@ -66,7 +66,7 @@ class Tapahtuma extends BaseModel {
     
     public function update() {
         $query = DB::connection()->prepare('UPDATE Tapahtuma SET tapahtuman_nimi = :tapahtuman_nimi, lyhyt_kuvaus = :lyhyt_kuvaus, pvm = :pvm, kellonaika = :kellonaika, tapahtumapaikka = :tapahtumapaikka WHERE id = :id');
-        $query->execute(array('tapahtuman_nimi' => $this->tapahtuman_nimi, 'lyhyt_kuvaus' => $this->lyhyt_kuvaus, 'pvm' => $this->pvm, 'kellonaika' => $this->kellonaika, 'tapahtumapaikka' => $this->tapahtumapaikka));
+        $query->execute(array('id' => $this->id,'tapahtuman_nimi' => $this->tapahtuman_nimi, 'lyhyt_kuvaus' => $this->lyhyt_kuvaus, 'pvm' => $this->pvm, 'kellonaika' => $this->kellonaika, 'tapahtumapaikka' => $this->tapahtumapaikka));
     }
     
     public function poista() {
@@ -88,7 +88,7 @@ class Tapahtuma extends BaseModel {
             $errors[] = 'Päivämäärä ei saa olla tyhjä!';
         } else {
             if (!$this->checkIfDate($this->pvm)) {
-                $errors[] = 'Päivämäärä ei ole muotoa DD-MM-YYYY!';
+                $errors[] = 'Päivämäärä ei ole muotoa YYYY-MM-DD!';
             }
         }
         return $errors;
@@ -100,7 +100,7 @@ class Tapahtuma extends BaseModel {
             $errors[] = 'Kellonaika ei saa olla tyhjä!';
         } else {
             if (!$this->checkIfTime($this->kellonaika)) {
-                $errors[] = 'Kellonaika ei ole muotoa MM:HH!';
+                $errors[] = 'Kellonaika ei ole muotoa MM:HH tai MM:HH:SS!';
             }
         }
         return $errors;

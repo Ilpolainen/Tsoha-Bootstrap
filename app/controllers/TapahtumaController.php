@@ -40,9 +40,10 @@ class TapahtumaController {
 
   
 
-    public static function editoiTapahtumaa($id) {
+    public static function naytaTapahtumanmuokkaussivu($id) {
         $tapahtuma = Tapahtuma::find($id);
-        View::make('tapahtumanmuokkaus.html', array('attribuutit' => $tapahtuma));
+        Kint::dump($tapahtuma);
+        View::make('tapahtumanmuokkaus.html', array('tapahtuma' => $tapahtuma));
     }
 
     public static function update($id) {
@@ -53,21 +54,25 @@ class TapahtumaController {
             'tapahtuman_nimi' => $parametrit['tapahtuman_nimi'],
             'lyhyt_kuvaus' => $parametrit['lyhyt_kuvaus'],
             'pvm' => $parametrit['pvm'],
-            'kellonaika' => $parametrit['tapahtumapaikka'],
-            'description' => $parametrit['description']
+            'kellonaika' => $parametrit['kellonaika'],
+            'tapahtumapaikka' => $parametrit['tapahtumapaikka']
         );
-
-        // Alustetaan Game-olio käyttäjän syöttämillä tiedoilla
+        
+//
+//        // Alustetaan Game-olio käyttäjän syöttämillä tiedoilla
         $tapahtuma = new Tapahtuma($attribuutit);
+        Kint::dump($attribuutit);
         $virheet = $tapahtuma->errors();
         
         if (count($virheet) > 0) {
+         Kint::dump($virheet); 
             View::make('tapahtumanmuokkaus.html', array('virheet' => $virheet, 'attribuutit' => $attribuutit));
         } else {
+            
             // Kutsutaan alustetun olion update-metodia, joka päivittää pelin tiedot tietokannassa
             $tapahtuma->update();
 
-            Redirect::to('/tapahtumat', array('message' => 'Tapahtumaa on muokattu onnistuneesti!'));
+           Redirect::to('/tapahtumat', array('message' => 'Tapahtumaa muokattiin onnistuneesti!'));
         }
     }
 

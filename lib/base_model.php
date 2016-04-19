@@ -43,11 +43,11 @@ class BaseModel {
         $y = 0;
         foreach ($parts as $part) {
             if ($i == 0) {
-                $d = $part;
+                $y = $part;
             } elseif ($i == 1) {
                 $m = $part;
             } elseif ($i == 2) {
-                $y = $part;
+                $d = $part;
             }
             $i = $i + 1;
         }
@@ -65,6 +65,7 @@ class BaseModel {
     public function checkIfTime($time) {
         $parts = explode(':', $time);
         $i = 0;
+        $seconds;
         $minutes = 0;
         $hours = 0;
         foreach ($parts as $part) {
@@ -72,22 +73,38 @@ class BaseModel {
                 $hours = $part;
             } elseif ($i == 1) {
                 $minutes = $part;
+            } elseif ($i == 2) {
+                $seconds = $part;
             }
             $i = $i + 1;
         }
-        
-        if ($i != 2) {         
-            return false;
+
+        if ($i == 2) {
+            if (!(is_numeric($minutes) && is_numeric($hours))) {
+                return false;
+            }
+            $minutes = intval($minutes);
+            $hours = intval($hours);
+            if ($minutes < 0 || $minutes > 59 || $hours < 0 || $hours > 23) {
+                return false;
+            }
+            return true;
         }
-        if (!(is_numeric($minutes) && is_numeric($hours))) {
-            return false;
+
+        if ($i == 3) {
+            if (!(is_numeric($minutes) && is_numeric($hours) && is_numeric($seconds))) {
+                return false;
+            }
+            $minutes = intval($minutes);
+            $hours = intval($hours);
+            $seconds = intval($seconds);
+            if ($seconds < 0 || $seconds > 59 ||  $minutes < 0 || $minutes > 59 || $hours < 0 || $hours > 23) {
+                return false;
+            }
+            return true;
         }
-        $minutes = intval($minutes);
-        $hours = intval($hours);
-        if ($minutes < 0 || $minutes > 59 || $hours < 0 || $hours > 23) {
-            return false;
-        }
-        return true;
+
+        return false;
     }
 
 }

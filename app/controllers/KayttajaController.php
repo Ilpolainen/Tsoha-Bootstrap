@@ -38,7 +38,8 @@ class KayttajaController extends BaseController {
         View::make('tilinluonti.html');
     }
 
-    public static function login() {
+    
+    public static function naytaKirjautumislomake() {
         View::make('kirjautuminen.html');
     }
 
@@ -47,12 +48,12 @@ class KayttajaController extends BaseController {
 
         $kayttaja = Kayttaja::authenticate($params['kayttajatunnus'], $params['salasana']);
 
-        if (!$user) {
-            View::make('kirjautuminen.html', array('error' => 'Väärä käyttäjätunnus tai salasana!', 'kayttajatunnus' => $params['kauttajatunnus']));
+        if (!$kayttaja) {
+            View::make('/kirjautuminen.html', array('error' => 'Väärä käyttäjätunnus tai salasana!', 'kayttajatunnus' => $params['kayttajatunnus']));
         } else {
             $_SESSION['kayttaja'] = $kayttaja->id;
 
-            Redirect::to('tapahtumat.html', array('message' => 'Tervetuloa takaisin ' . $kayttaja->kayttajatunnus . '!'));
+            Redirect::to('/tapahtumat', array('message' => 'Tervetuloa takaisin ' . $kayttaja->kayttajatunnus . '!'));
         }
     }
 

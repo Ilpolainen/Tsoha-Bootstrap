@@ -25,9 +25,7 @@ class HelloWorldController extends BaseController {
         View::make('Helloworld.html');
     }
 
-    public function naytaKirjautumislomake() {
-        View::make('kirjautuminen.html');
-    }
+    
 
     public function loginerrorviesti() {
         View::make('Pelisivu.html');

@@ -75,7 +75,7 @@ class Kayttaja extends BaseModel {
     }
 
     public function authenticate($kayttajatunnus, $salasana) {
-        $query = DB::connection()->prepare('SELECT * FROM Player WHERE kayttajatunnus = :kayttajatunnus AND salasana = :salasana LIMIT 1');
+        $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE kayttajatunnus = :kayttajatunnus AND salasana = :salasana LIMIT 1');
         $query->execute(array('kayttajatunnus' => $kayttajatunnus, 'salasana' => $salasana));
         $row = $query->fetch();
         if ($row) {

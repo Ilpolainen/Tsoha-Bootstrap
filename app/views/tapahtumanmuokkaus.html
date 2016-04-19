@@ -7,10 +7,10 @@
 <div class="container luonti-container">
     <br>
     <div class="container">
-        <form>
+        <form method="post" action="{{base_path}}/tapahtumanmuokkaus/{{tapahtuma.id}}">
             <div class="form-group">
                 <div class="col-xs-5">
-                    <h1>{{attribuutit.tapahtuman_nimi}}</h1>
+                    <h1>{{tapahtuma.tapahtuman_nimi}}</h1>
 
                     <br>
 
@@ -21,25 +21,26 @@
 
                     <p>
                         <label>Tapahtuman nimi:</label>
-                        <input class="form-control" placeholder="{{attribuutit.tapahtuman_nimi}}">
+                        <input class="form-control" name="tapahtuman_nimi" value="{{tapahtuma.tapahtuman_nimi}}">
                     </p>
                     <p>
                         <label>Päivämäärä:</label>
-                        <input class="form-control" placeholder="{{attribuutit.pvm}}">
+                        <input class="form-control" name="pvm" value="{{tapahtuma.pvm}}">
                     </p>
                     <p>
                         <label>Kellonaika:</label>
-                        <input class="form-control" placeholder="{{attribuutit.kellonaika}}">
+                        <input class="form-control" name="kellonaika" value="{{tapahtuma.kellonaika}}">
                     </p>
                     <p>
-                        <label>Tapahtuma-Paikka:</label>
-                        <input class="form-control" placeholder="{{attribuutit.tapahtumapaikka}}"> 
+                        <label>Tapahtumapaikka:</label>
+                        <input class="form-control" name="tapahtumapaikka" value="{{tapahtuma.tapahtumapaikka}}"> 
                     </p>
                     <p>
                         <label>Lyhyt kuvaus:</label>
-                        <input class="form-control" placeholder="{{attribuutit.lyhyt_kuvaus}}">
+                        <input class="form-control" name="lyhyt_kuvaus" value="{{tapahtuma.lyhyt_kuvaus}}">
                     </p>
                     <p>
+                        <button type="submit" class="btn btn-primary">Hyväksy muutokset</button>
                         <!-- Poistopainike tulee tähän -->
 
                     </p>
@@ -50,17 +51,16 @@
         <form>
             <div class="form-group">
                 <div class="col-xs-5">
-                    <form method="post" action="{{base_path}}/tapahtumanmuokkaus/{{attribuutit.id}}" style="display: inline-block;">
-                        <button type="submit" class="btn btn-primary">Hyväksy muutokset</button>
-                    </form>
+                    
                     <br>
-                    <form method="post" action="{{base_path}}/tapahtumanpoisto/{{attribuutit.id}}" style="display: inline-block;">
+                    <form method="post" action="{{base_path}}/tapahtumanpoisto/{{tapahtuma.id}}" style="display: inline-block;">
                         <button type="submit" class="btn btn-danger">Poista</button>
                     </form>
                 </div>
             </div>
         </form>
     </div>
+    
 
     <br>
 

@@ -7,7 +7,7 @@ $routes->get('/', function() {
 
 
 $routes->get('/kirjautuminen', function() {
-    HelloWorldController::naytaKirjautumislomake();
+    KayttajaController::naytaKirjautumislomake();
 });
 
 $routes->get('/tilinluonti', function() {
@@ -61,11 +61,11 @@ $routes->post('/tapahtumanluonti', function() {
 
 $routes->get('/tapahtumanmuokkaus/:id/', function($id){
   // Pelin muokkauslomakkeen esittäminen
-  TapahtumaController::editoiTapahtumaa($id);
+  TapahtumaController::naytaTapahtumanmuokkaussivu($id);
 });
 $routes->post('/tapahtumanmuokkaus/:id/', function($id){
   // Pelin muokkaaminen
-  TapahtumaController::editoiTapahtumaa($id);
+  TapahtumaController::update($id);
 });
 
 $routes->post('/tapahtumanpoisto/:id/', function($id){
@@ -79,7 +79,7 @@ $routes->get('/hiekkalaatikko', function() {
 
 $routes->get('/kirjautuminen', function(){
   // Kirjautumislomakkeen esittäminen
-  KayttajaController::login();
+  KayttajaController::naytaKirjautumislomake();
 });
 $routes->post('/kirjautuminen', function(){
   // Kirjautumisen käsittely
