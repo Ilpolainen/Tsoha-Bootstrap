@@ -13,7 +13,7 @@
  */
 class Tapahtuma extends BaseModel {
 
-    public $id, $tapahtuman_nimi, $lyhyt_kuvaus, $pvm, $kellonaika, $tapahtumapaikka;
+    public $id, $tapahtuman_nimi, $lyhyt_kuvaus, $pvm, $kellonaika, $tapahtumapaikka, $tapahtuman_luoja;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -34,7 +34,8 @@ class Tapahtuma extends BaseModel {
                 'pvm' => $row['pvm'],
                 'kellonaika' => $row['kellonaika'],
                 'tapahtumapaikka' => $row['tapahtumapaikka'],
-            ));
+                'tapahtuman_luoja' => $row['tapahtuman_luoja']
+            ));           
         }
         Kint::dump($tapahtumat);
         return $tapahtumat;
@@ -52,23 +53,31 @@ class Tapahtuma extends BaseModel {
                 'pvm' => $row['pvm'],
                 'kellonaika' => $row['kellonaika'],
                 'tapahtumapaikka' => $row['tapahtumapaikka'],
+                'tapahtuman_luoja' => $row['tapahtuman_luoja']
             ));
         }
         return $tapahtuma;
     }
 
     public function tallenna() {
-        $query = DB::connection()->prepare('INSERT INTO Tapahtuma (tapahtuman_nimi, tapahtumapaikka, lyhyt_kuvaus, pvm, kellonaika) VALUES (:tapahtuman_nimi, :tapahtumapaikka, :lyhyt_kuvaus, :pvm, :kellonaika) RETURNING id');
-        $query->execute(array('tapahtuman_nimi' => $this->tapahtuman_nimi, 'tapahtumapaikka' => $this->tapahtumapaikka, 'lyhyt_kuvaus' => $this->lyhyt_kuvaus, 'pvm' => $this->pvm, 'kellonaika' => $this->kellonaika));
+        $query = DB::connection()->prepare('INSERT INTO Tapahtuma (tapahtuman_nimi, tapahtumapaikka, lyhyt_kuvaus, pvm, kellonaika, tapahtuman_luoja) VALUES (:tapahtuman_nimi, :tapahtumapaikka, :lyhyt_kuvaus, :pvm, :kellonaika, :tapahtuman_luoja) RETURNING id');
+        $query->execute(array('tapahtuman_nimi' => $this->tapahtuman_nimi, 'tapahtumapaikka' => $this->tapahtumapaikka, 'lyhyt_kuvaus' => $this->lyhyt_kuvaus, 'pvm' => $this->pvm, 'kellonaika' => $this->kellonaika, 'tapahtuman_luoja' => $this->tapahtuman_luoja));
         $row = $query->fetch();
         $this->id = $row['id'];
     }
-    
+
     public function update() {
-        $query = DB::connection()->prepare('UPDATE Tapahtuma SET tapahtuman_nimi = :tapahtuman_nimi, lyhyt_kuvaus = :lyhyt_kuvaus, pvm = :pvm, kellonaika = :kellonaika, tapahtumapaikka = :tapahtumapaikka WHERE id = :id');
-        $query->execute(array('id' => $this->id,'tapahtuman_nimi' => $this->tapahtuman_nimi, 'lyhyt_kuvaus' => $this->lyhyt_kuvaus, 'pvm' => $this->pvm, 'kellonaika' => $this->kellonaika, 'tapahtumapaikka' => $this->tapahtumapaikka));
+        $query = DB::connection()->prepare('UPDATE Tapahtuma SET tapahtuman_nimi = :tapahtuman_nimi, lyhyt_kuvaus = :lyhyt_kuvaus, pvm = :pvm, kellonaika = :kellonaika, tapahtumapaikka = :tapahtumapaikka, tapahtuman_luoja = :tapahtuman_luoja WHERE id = :id');
+        $query->execute(array(
+            'id' => $this->id, 
+            'tapahtuman_nimi' => $this->tapahtuman_nimi, 
+            'lyhyt_kuvaus' => $this->lyhyt_kuvaus,
+            'pvm' => $this->pvm, 
+            'kellonaika' => $this->kellonaika, 
+            'tapahtumapaikka' => $this->tapahtumapaikka, 
+            'tapahtuman_luoja' => $this->tapahtuman_luoja));
     }
-    
+
     public function poista() {
         $query = DB::connection()->prepare('DELETE FROM Tapahtuma WHERE id = :id');
         $query->execute(array('id' => $this->id));
@@ -76,15 +85,18 @@ class Tapahtuma extends BaseModel {
 
     public function validateTapahtumannimi() {
         $errors = array();
-        if (!$this->validate_string_length($this->tapahtuman_nimi, 3)) {
+        if (!$this->validate_min_string_length($this->tapahtuman_nimi, 3)) {
             $errors[] = 'Tapahtumannimen tulee olla vähintään 3 merkkiä pitkä';
+        }
+        if (!$this->validate_max_string_length($this->tapahtuman_nimi, 50)) {
+            $errors[] = 'Tapahtumannimi saa olla enintään 50 merkkiä pitkä';
         }
         return $errors;
     }
 
     public function validatePvm() {
         $errors = array();
-        if (!$this->validate_string_length($this->pvm, 1)) {
+        if (!$this->validate_min_string_length($this->pvm, 1)) {
             $errors[] = 'Päivämäärä ei saa olla tyhjä!';
         } else {
             if (!$this->checkIfDate($this->pvm)) {
@@ -93,10 +105,10 @@ class Tapahtuma extends BaseModel {
         }
         return $errors;
     }
-    
+
     public function validateKellonaika() {
         $errors = array();
-        if (!$this->validate_string_length($this->kellonaika, 1)) {
+        if (!$this->validate_min_string_length($this->kellonaika, 1)) {
             $errors[] = 'Kellonaika ei saa olla tyhjä!';
         } else {
             if (!$this->checkIfTime($this->kellonaika)) {
@@ -105,12 +117,6 @@ class Tapahtuma extends BaseModel {
         }
         return $errors;
     }
-    
-    
-    
-    
-    
-    
 
     public static function findByParams($params) {
         foreach ($params as $par) {

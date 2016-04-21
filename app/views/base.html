@@ -39,17 +39,25 @@
                 <div class="collapse navbar-collapse" id="navigation">
                     <ul class="nav navbar-nav">
                         <!-- Navigaation linkit -->
-                        <li><a href="{{base_path}}/kirjautuminen">kirjaudu sisään</a></li>
-                        <li><a href="{{base_path}}/tilinluonti">luo tili</a></li>
-                        <li><a href="{{base_path}}/profiilinmuokkaus">muokkaa profiilia</a></li>
-                        <li><a href="{{base_path}}/omasivu">oma sivu</a></li>
-                        <li><a href="{{base_path}}/tapahtumat">tapahtumat</a></li>
-                        <li><a href="{{base_path}}/kiinnostukset">kiinnostukset</a></li>
-                        <li><a href="{{base_path}}/kiinnostuksenluonti">luo kiinnostus</a></li>
-                        <li><a href="{{base_path}}/tapahtumanluonti">luo tapahtuma</a></li>
-                        <li><a href="{{base_path}}/kayttajienlistaus">käyttäjät</a></li>
-                        <li><a href="{{base_path}}/julkinenprofiili">profiilisivu</a></li>
+                        
+                        {% if user_logged_in %}
+                        <li><a href="{{base_path}}/profiilinmuokkaus">Muokkaa profiilia</a></li>
+                        <li><a href="{{base_path}}/omasivu">Omasivu</a></li>
+                        <li><a href="{{base_path}}/tapahtumat">Tapahtumat</a></li>
+                        <li><a href="{{base_path}}/kiinnostukset">Kiinnostukset</a></li>
+                        <li><a href="{{base_path}}/kiinnostuksenluonti">Luo kiinnostus</a></li>
+                        <li><a href="{{base_path}}/tapahtumanluonti">Luo tapahtuma</a></li>
+                        <li><a href="{{base_path}}/kayttajienlistaus">Käyttäjät</a></li>
+                        {% else %}
+                        <li><a href="{{base_path}}/kirjautuminen">Kirjaudu sisään</a></li>
+                        <li><a href="{{base_path}}/tilinluonti">Luo tili</a></li>
+                        {% endif %}
                     </ul>
+                    {% if user_logged_in %}
+                    <form class="navbar-form navbar-right" method="post" action="{{base_path}}/uloskirjautuminen">
+                        <button type="submit" class="btn-default">Kirjaudu ulos</button>
+                    </form>
+                    {% endif %}
                 </div>
             </div>
         </nav>

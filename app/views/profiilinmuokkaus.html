@@ -8,31 +8,45 @@
             <div class="form-group">
                 <div class="col-xs-5">
 
-                    <h2>Profiilin Muokkaus:</h2>
+                    <h1>{{kayttaja.kayttajatunnus}}</h1>
+                    
+                    <h3>Profiilin Muokkaus:</h3>
 
                     <br>
 
 
                     <p>
                         <label>Etunimi:</label>
-                        <input type="text" class="form-control" placeholder="Etunimi">
+                        <input class="form-control" name="etunimi" value="{{kayttaja.etunimi}}">
                     </p>
                     <p>
                         <label>Sukunimi:</label>
-                        <input class="form-control" placeholder="Sukunimi">
+                        <input class="form-control" name="sukunimi" value="{{kayttaja.sukunimi}}">
                     </p>
                     <p>
                         <label>Sähköposti:</label>
-                        <input class="form-control" placeholder="matti.meikalainen@roskaposti.fi">
+                        <input class="form-control" name="email_osoite" value="{{kayttaja.email_osoite}}">
                     </p>
 
                     <p>
                         <label>Salasana:</label>
-                        <input class="form-control" type="password" placeholder="Salasana">
+                        <input class="form-control" name="salasana" type="password" value="{{kayttaja.salasana}}">
                     </p>
                     <p>
                         <label>Salasana uudelleen:</label>
-                        <input class="form-control" type="password" placeholder="Salasana">
+                        <input class="form-control" name="salasanaUudelleen" type="password" value="{{kayttaja.salasana}}">
+                    </p>
+                    <p>
+                        <label>Puhelinnumero:</label>
+                        <input class="form-control" name="puhelinnumero"  value="{{kayttaja.puhelinnumero}}">
+                    </p>
+                    <p>
+                        <label>Osoite:</label>
+                        <input class="form-control" name="osoite" value="{{kayttaja.osoite}}">
+                    </p>
+                    <p>
+                       <label>Lyhyt kuvaus itsestäni:</label>
+                        <input class="form-control" name="kuvaus" value="{{kayttaja.kuvaus}}"> 
                     </p>
                     <div>
                         <button type="submit" class="btn btn-primary">Varmista muutokset</button>
@@ -43,21 +57,5 @@
     </div>
     <br>
 
-
-    <div class="container">
-        <div class="form-group">
-            <div class="col-xs-5">
-                <form>
-                    <div class="form-group">
-
-                    </div>
-                </form>
-            </div>
-        </div>
-        <br>
-        <br>
-        <br>
-        <br>
-    </div>
 
     {% endblock %}

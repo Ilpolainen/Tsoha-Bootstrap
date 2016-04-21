@@ -18,22 +18,21 @@
 
                     </div>
                     <br>
+                    {% if check_user_logged_in %}
+                    
+                    {% else %}
                     <div>
-                        <a href="http://vipohjol.users.cs.helsinki.fi/Tsoha/kirjautuminen">Kirjaudu sisään</a>
+                        <a href="http://vipohjol.users.cs.helsinki.fi/Tsoha/kirjautuminen" class="btn btn-primary">Kirjaudu sisään</a>
                     </div>
 
                     <br>
 
-                    Jos sinulla ei ole vielä tiliä, voit luoda sellaisen allaolevasta linkistä.
-
+                    <h4>Jos sinulla ei ole vielä tiliä, voit luoda sellaisen allaolevasta linkistä.</h4>
                     <br>
-
-                    <br>
-
                     <div>
-                        <a href="http://vipohjol.users.cs.helsinki.fi/Tsoha/tilinluonti">Luo tili</a>    
+                        <a href="http://vipohjol.users.cs.helsinki.fi/Tsoha/tilinluonti" class="btn btn-default">Luo tili</a>    
                     </div>
-
+                    {% endif %}
 
                     <br>
 

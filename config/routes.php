@@ -1,13 +1,23 @@
 <?php
 
-
 $routes->get('/', function() {
-    HelloWorldController::naytaEtusivu();
+    KayttajaController::naytaEtusivu();
 });
 
+$routes->get('/hiekkalaatikko', function() {
+    HelloWorldController::sandbox();
+});
 
 $routes->get('/kirjautuminen', function() {
     KayttajaController::naytaKirjautumislomake();
+});
+
+$routes->post('/kirjautuminen', function() {
+    KayttajaController::handle_login();
+});
+
+$routes->post('/uloskirjautuminen', function() {
+    KayttajaController::kirjauduUlos();
 });
 
 $routes->get('/tilinluonti', function() {
@@ -22,33 +32,42 @@ $routes->get('/omasivu', function() {
     HelloWorldController::naytaomasivu();
 });
 
-$routes->get('/profiilinmuokkaus', function() {
-    HelloWorldController::muokkaaprofiilia();
+$routes->get('/profiilinmuokkaus/', function() {
+    KayttajaController::naytaProfiilinmuokkaussivu();
 });
 
-$routes->get('/etusivu', function() {
-    HelloWorldController::naytaEtusivu();
+$routes->post('/profiilinmuokkaus/', function() {
+    KayttajaController::muokkaaProfiilia();
 });
 
 $routes->get('/kiinnostukset', function() {
     KiinnostusController::naytaKiinnostustagit();
 });
 
+$routes->post('/paivitakiinnostukset', function() {
+    KiinnostusController::paivitaKiinnostukset();
+});
+
 $routes->get('/kiinnostuksenluonti', function() {
-    HelloWorldController::luokiinnostus();
+    KiinnostusController::naytaKiinnostuksenLuonti();
+});
+
+$routes->post('/kiinnostuksenluonti', function() {
+    KiinnostusController::luoKiinnostus();
 });
 
 $routes->get('/kayttajienlistaus', function() {
     KayttajaController::naytaKayttajat();
 });
 
-$routes->get('/julkinenprofiili', function() {
-    HelloWorldController::julkinenprofiili();
+$routes->get('/julkinenprofiili/:id/', function($id) {
+    KayttajaController::julkinenprofiili($id);
 });
 
 $routes->get('/tapahtumat', function () {
-    TapahtumaController::naytaTapahtumasivu();
+    TapahtumaController::naytaTapahtumatSivu();
 });
+
 
 $routes->get('/tapahtumanluonti', function() {
     TapahtumaController::naytaTapahtumanluontisivu();
@@ -58,32 +77,35 @@ $routes->post('/tapahtumanluonti', function() {
     TapahtumaController::luoUusiTapahtuma();
 });
 
-
-$routes->get('/tapahtumanmuokkaus/:id/', function($id){
-  // Pelin muokkauslomakkeen esittäminen
-  TapahtumaController::naytaTapahtumanmuokkaussivu($id);
-});
-$routes->post('/tapahtumanmuokkaus/:id/', function($id){
-  // Pelin muokkaaminen
-  TapahtumaController::update($id);
+$routes->get('/tapahtumasivu/:id/', function($id) {
+    TapahtumaController::naytaTapahtuma($id);
 });
 
-$routes->post('/tapahtumanpoisto/:id/', function($id){
-  // Pelin poisto
-  TapahtumaController::poista($id);
+
+
+$routes->get('/tapahtumanmuokkaus/:id/', function($id) {
+    TapahtumaController::naytaTapahtumanmuokkaussivu($id);
 });
 
-$routes->get('/hiekkalaatikko', function() {
-    HelloWorldController::sandbox();
+$routes->post('/tapahtumanmuokkaus/:id/', function($id) {
+    TapahtumaController::update($id);
 });
 
-$routes->get('/kirjautuminen', function(){
-  // Kirjautumislomakkeen esittäminen
-  KayttajaController::naytaKirjautumislomake();
+$routes->get('/tapahtumanpoisto/:id/', function($id) {
+    TapahtumaController::naytaTapahtumanpoisto($id);
 });
-$routes->post('/kirjautuminen', function(){
-  // Kirjautumisen käsittely
-  KayttajaController::handle_login();
+
+$routes->post('/tapahtumanpoisto/:id/', function($id) {
+    TapahtumaController::poista($id);
+});
+
+
+$routes->post('/tapahtumasivu/:id/', function($id) {
+    OsallistumisController::osallistu($id);
+});
+
+$routes->post('/tapahtumasivu/:id/poistaIlmo', function($id) {
+    OsallistumisController::poistaIlmo($id);
 });
 
 

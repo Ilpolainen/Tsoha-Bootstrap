@@ -1,41 +1,56 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container tapahtuma-container">
-    
-        <h2>Tulevia tapahtumia</h2>
-    
+
+    <h2>Tulevia tapahtumia</h2>
 
 
 
-<br>
 
-<table class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>Tapahtuman nimi</th>
-            <th>Tapahtumapaikka</th>
-            <th>Lyhyt Kuvaus</th>
-            
-            <th>Tapahtuma-aika</th>
-            <th>Osallistuminen</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for tapahtuma in tapahtumat %}
-        <tr>
-            <td>{{tapahtuma.tapahtuman_nimi}}</td>
-            <td>{{tapahtuma.tapahtumapaikka}}</td>
-            <td>{{tapahtuma.lyhyt_kuvaus}}</td>
-         
-            <td>{{tapahtuma.pvm}} , {{tapahtuma.kellonaika}}</td>
-            <td><label class="label label-success">Osallistun</label></td>
-            <td>
-                <a href="{{base_path}}/tapahtumanmuokkaus/{{tapahtuma.id}}" class="btn btn-default">Muokkaa</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+    <br>
+
+
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Tapahtuman nimi</th>
+                <th>Tapahtumapaikka</th>
+                <th>Tapahtuma-aika</th>
+                <th>Osallistuminen</th>
+                <th>Tapahtumasivut</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for tapahtuma in tapahtumat %}
+            <tr>
+                <td>{{tapahtuma.tapahtuman_nimi}}</td>
+                <td>{{tapahtuma.tapahtumapaikka}}</td>
+                <td>{{tapahtuma.pvm}} , {{tapahtuma.kellonaika}}</td>
+                <td>
+                    {% if tapahtuma.osallistuminen %}
+                    <label class="label label-success">Osallistun</label>
+                    {% else %}
+                    -
+                    {% endif %}
+                </td>
+
+                <td>
+                    <a href="{{base_path}}/tapahtumasivu/{{tapahtuma.id}}" class="btn btn-default">Näytä</a>
+                </td>
+                {% if tapahtuma.onLuoja %}
+                <td>
+                    <a href="{{base_path}}/tapahtumanmuokkaus/{{tapahtuma.id}}" class="btn btn-primary">Muokkaa Tapahtumaa</a>
+                </td>
+
+                {% endif %}
+
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
 
 </div>

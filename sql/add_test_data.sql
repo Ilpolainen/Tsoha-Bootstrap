@@ -1,4 +1,3 @@
-INSERT INTO Kiinnostustagi (kiinnostus) VALUES ('Pokeri');
-INSERT INTO Kiinnostustagi (kiinnostus) VALUES ('Jalkapallo');
-INSERT INTO Kiinnostustagi (kiinnostus) VALUES ('Matematiikka');
+DELETE FROM Kiinnostustagi WHERE id = 3;
+
 -- Lisää INSERT INTO lauseet tähän tiedostoon

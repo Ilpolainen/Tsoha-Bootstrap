@@ -32,6 +32,24 @@ class Kiinnostustagi extends BaseModel {
 
         return $tagit;
     }
+    
+    public function tallenna() {
+        $query = DB::connection()->prepare('INSERT INTO Kiinnostustagi (kiinnostus) VALUES (:kiinnostus) RETURNING id');
+        $query->execute(array('kiinnostus' => $this->kiinnostus));
+        $row = $query->fetch();
+        $this->id = $row['id'];
+    }
+
+    public function onJoOlemassa() {
+        $query = DB::connection()->prepare('SELECT * FROM Kiinnostustagi WHERE kiinnostus = :kiinnostus');
+        $query->execute(array("kiinnostus" => $this->kiinnostus));
+        $row = $query->fetch();
+        if ($row == null) {
+            return false;
+        }
+        return true;
+    }
+
 
     public static function find($id) {
         $query = DB::connection()->prepare("SELECT * FROM Kiinnostustagi WHERE id = :id LIMIT 1");
@@ -44,6 +62,7 @@ class Kiinnostustagi extends BaseModel {
 
         return $tagi;
     }
+
 
     public function validateKiinnostus() {
         $errors = array();

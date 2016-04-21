@@ -27,8 +27,16 @@ class BaseModel {
         return $errors;
     }
 
-    public function validate_string_length($string, $length) {
+    public function validate_min_string_length($string, $length) {
         if ($string == '' || $string == null || strlen($string) < $length) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public function validate_max_string_length($string, $length) {
+        if ($string == '' || $string == null || strlen($string) > $length) {
             return false;
         } else {
             return true;

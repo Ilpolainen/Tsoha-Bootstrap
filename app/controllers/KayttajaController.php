@@ -14,8 +14,16 @@
 class KayttajaController extends BaseController {
 
     public static function naytaKayttajat() {
+        self::check_logged_in();
         $kayttajat = Kayttaja::findAll();
         View::make('kayttajienlistaus.html', array('kayttajat' => $kayttajat));
+    }
+
+    public function julkinenprofiili($id) {
+        self::check_logged_in();
+        $kayttaja = Kayttaja::find($id);
+        $kiinnostukset = Kayttajan_kiinnostus::findByKayttaja($id);
+        View::make('julkinenprofiili.html', array('kiinnostukset' => $kiinnostukset, 'kayttaja' => $kayttaja));
     }
 
     public static function luoTili() {
@@ -28,19 +36,61 @@ class KayttajaController extends BaseController {
             'syntyma_aika' => $params['syntyma_aika'],
             'osoite' => $params['osoite'],
             'puhelinnumero' => $params['puhelinnumero'],
-            'email_osoite' => $params['email_osoite']));
+            'email_osoite' => $params['email_osoite'],
+            'kuvaus' => $params['kuvaus']
+        ));
         $kayttaja->tallenna();
 
-        Redirect::to('/', array('message' => 'Profiili lisättiin onnistuneesti!'));
+        Redirect::to('/etusivu', array('message' => 'Profiili lisättiin onnistuneesti!'));
     }
 
     public function naytaTilinluontilomake() {
         View::make('tilinluonti.html');
     }
 
-    
+    public static function muokkaaProfiilia() {
+        self::check_logged_in();
+        $id = self::get_user_logged_in();
+        $parametrit = $_POST;
+
+        $attribuutit = array(
+            'id' => $id,
+            'etunimi' => $parametrit['etunimi'],
+            'sukunimi' => $parametrit['sukunimi'],
+            'kayttajatunnus' => $parametrit['kayttajatunnus'],
+            'salasana' => $parametrit['salasana'],
+            'osoite' => $parametrit['osoite'],
+            'puhelinnumero' => $parametrit['puhelinnumero'],
+            'email_osoite' => $parametrit['email_osoite'],
+            'kuvaus' => $parametrit['kuvaus']
+        );
+
+//
+//        // Alustetaan Game-olio käyttäjän syöttämillä tiedoilla
+        $kayttaja = new Kayttaja($attribuutit);
+        Kint::dump($attribuutit);
+        $virheet = $kayttaja->errors();
+
+        if (count($virheet) > 0) {
+            Kint::dump($virheet);
+            View::make('profiilinmuokkaus.html', array('virheet' => $virheet, 'attribuutit' => $attribuutit));
+        } else {
+
+            // Kutsutaan alustetun olion update-metodia, joka päivittää pelin tiedot tietokannassa
+            $kayttaja->update();
+
+            Redirect::to('/tapahtumat', array('message' => 'Profiiliasi muokattiin onnistuneesti!'));
+        }
+    }
+
     public static function naytaKirjautumislomake() {
         View::make('kirjautuminen.html');
+    }
+
+    public static function naytaProfiilinmuokkaussivu() {
+        self::check_logged_in();
+        $kayttaja = self::get_user_logged_in();
+        View::make('profiilinmuokkaus.html', array('kayttaja' => $kayttaja));
     }
 
     public static function handle_login() {
@@ -53,9 +103,18 @@ class KayttajaController extends BaseController {
         } else {
             $_SESSION['kayttaja'] = $kayttaja->id;
 
-            Redirect::to('/tapahtumat', array('message' => 'Tervetuloa takaisin ' . $kayttaja->kayttajatunnus . '!'));
+            Redirect::to('/julkinenprofiili/:id', array('message' => 'Tervetuloa takaisin! ' . $kayttaja->kayttajatunnus));
         }
     }
 
-    //put your code here
+    public static function kirjauduUlos() {
+        $_SESSION['kayttaja'] = null;
+
+        Redirect::to('/etusivu', array('message' => 'Olet kirjautunut ulos! Tervetuloa uudelleen!'));
+    }
+
+    public static function naytaEtusivu() {
+        View::make('etusivu.html');
+    }
+
 }

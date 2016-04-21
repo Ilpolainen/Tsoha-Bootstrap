@@ -47,16 +47,12 @@ class HelloWorldController extends BaseController {
         View::make('etusivu.html');
     }
 
-    public function luokiinnostus() {
-        View::make('kiinnostuksenluonti.html');
-    }
+   
 
     public function kayttajienlistaus() {
         View::make('kayttajienlistaus.html');
     }
 
-    public function julkinenprofiili() {
-        View::make('julkinenprofiili.html');
-    }
+    
 
 }

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+
+
+<div class="container kirjautumis-container">
+    <br>
+    <div class="container">
+        <form method="post">
+            <h1>Haluatko varmasti poistaa tapahtuman {{tapahtuma.tapahtuman_nimi}}</h1>
+            <p>
+                <button type="submit" class="btn btn-danger">Poista</button>
+            </p>
+            <p>
+                <a href="{{base_path}}/tapahtumanmuokkaus/{{tapahtuma.id}}" class="btn btn-primary">En sittenkään</a>
+            </p>
+        </form>
+    </div>
+    <br>
+</div>
+{% endblock %}

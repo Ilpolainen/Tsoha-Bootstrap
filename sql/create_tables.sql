@@ -5,10 +5,11 @@ etunimi varchar(50) NOT NULL,
 sukunimi varchar(50) NOT NULL,
 kayttajatunnus varchar(20) NOT NULL,
 salasana varchar(16) NOT NULL,
-syntyma_aika DATE,
+syntyma_aika DATE NOT NULL,
 osoite varchar(60),
 puhelinnumero varchar(15),
-email_osoite varchar(50)
+email_osoite varchar(50),
+kuvaus varchar(300)
 );
 
 
@@ -18,15 +19,16 @@ tapahtuman_nimi varchar(50) NOT NULL,
 lyhyt_kuvaus varchar(255),
 pvm DATE NOT NULL,
 kellonaika TIME NOT NULL,
-tapahtumapaikka varchar(100) NOT NULL
+tapahtumapaikka varchar(100) NOT NULL,
+tapahtuman_luoja INTEGER REFERENCES Kayttaja (id)
 );
 
 
 
 CREATE TABLE Osallistuminen (
 id SERIAL PRIMARY KEY,
-kayttaja INTEGER NOT NULL,
-tapahtuma INTEGER NOT NULL
+kayttaja_id INTEGER NOT NULL,
+tapahtuma_id INTEGER NOT NULL
 );
 
 CREATE TABLE Kiinnostustagi (

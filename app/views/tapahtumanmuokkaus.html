@@ -41,26 +41,18 @@
                     </p>
                     <p>
                         <button type="submit" class="btn btn-primary">Hyväksy muutokset</button>
-                        <!-- Poistopainike tulee tähän -->
-
                     </p>
+                    <p>
+                    <a href="{{base_path}}/tapahtumanpoisto/{{tapahtuma.id}}" class="btn btn-danger">Poista</a>
+                    </p>
+
                 </div>
             </div>
         </form>
         <br>
-        <form>
-            <div class="form-group">
-                <div class="col-xs-5">
-                    
-                    <br>
-                    <form method="post" action="{{base_path}}/tapahtumanpoisto/{{tapahtuma.id}}" style="display: inline-block;">
-                        <button type="submit" class="btn btn-danger">Poista</button>
-                    </form>
-                </div>
-            </div>
-        </form>
+
     </div>
-    
+
 
     <br>
 

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container kirjautumis-container">
+    <br>
+    <div class="container">
+        <br>
+
+        <h1>{{tapahtuma.tapahtuman_nimi}}</h1>
+        <br>
+        {%if tapahtuma.osallistuminen %}
+        <label class="label label-success">Osallistun</label>
+        {% else %}
+        <label class="label label-default">En osallistu</label>
+        {% endif %}
+        <br>
+        <br>
+        <ul>
+            <li><strong>Tapahtumapaikka: </strong>{{tapahtuma.tapahtumapaikka}}</li>            
+            <li><strong>Päivämäärä: </strong>{{tapahtuma.pvm}}</li>
+            <li><strong>Kellonaika: </strong>{{tapahtuma.kellonaika}}</li>
+            <li><strong>Tapahtumanluoja: </strong>{{tapahtuma.tapahtuman_luoja}}</li>
+        </ul>
+        <br>
+        <ul><li><label> Kuvaus: </label><p>{{tapahtuma.lyhyt_kuvaus}}</p></li></ul>
+        <br>
+        <br>
+    </div>
+    {% if tapahtuma.osallistuminen %}
+    <form method="post" action="{{base_path}}/tapahtumasivu/{{tapahtuma.id}}/poistaIlmo">
+        <div class="col-xs-5">
+            <button type="submit" class="btn btn-danger">En Osallistukaan</button>
+        </div>
+    </form>
+    {% else %}
+    <form method="post" action="{{base_path}}/tapahtumasivu/{{tapahtuma.id}}">
+        <div class="col-xs-5">
+            <button type="submit" class="btn btn-success">Osallistu</button>
+        </div>
+    </form>
+    {% endif %}
+    {% if tapahtuma.onLuoja %}
+    <a href="{{base_path}}/tapahtumanmuokkaus/{{tapahtuma.id}}" class="btn btn-default">Muokkaa Tapahtumaa</a>
+    {% endif %}
+    <br>
+    <br>
+    <br>
+    <br>
+</div>
+
+{% endblock %}

@@ -7,21 +7,17 @@
        
         <br>
         <div class="col-lg-offset-1">
-             <h2>Ilmari Pohjola</h2>
+             <h2>{{kayttaja.kayttajatunnus}}</h2>
         <br>
-        <ul>
-            <li><strong>Ikä: </strong>36</li>
-            <li><strong>Puhnro:</strong> 04055555555</li>
-            <li><strong>Sähköposti: </strong> dum@hotmail.com</li>
-        </ul>
+        
         <br>
             <div class="checkbox">
 
                 <h4>Kiinnostuksenkohteet:</h4>
                 <ul>
-                    <li><strong>Jalkapallo</strong></li>
-                    <li><strong>Matematiikka</strong></li>
-                    <li><strong>Ohjelmointi</strong></li>
+                    {% for kiinnostus in kiinnostukset %}
+                    <li><strong>{{kiinnostus.kiinnostus}}</strong></li>
+                    {% endfor %}
                 </ul>
 
                 <br>
@@ -29,7 +25,7 @@
 
                 <h4>Lyhyt kuvaus itsestäni:</h4>
                 <ul>
-                    <li>Olen mörkö, joka syntyi maaliskuussa syödäkseen tuoreita kukkia.</li>
+                    <li>{{kayttaja.kuvaus}}</li>
                 </ul>
             </div>
         </div>
