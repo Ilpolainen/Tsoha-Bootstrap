@@ -21,10 +21,18 @@ class KayttajaController extends BaseController {
 
     public function julkinenprofiili($id) {
         self::check_logged_in();
-        Kint::dump($id);
+//        
         $kayttajaid = intval($id);
+//        Kint::dump($kayttajaid);
+     
         $kayttaja = Kayttaja::find($id);
-        $kiinnostukset = Kayttajan_kiinnostus::findByKayttaja($kayttajaid);
+//        Kint::dump($kayttaja);
+           
+        $kiinnostukset = Kiinnostustagi::findByKayttaja($kayttajaid);
+        
+//        Kint::dump($kiinnostukset);
+//        die();
+        
         View::make('julkinenprofiili.html', array('kiinnostukset' => $kiinnostukset, 'kayttaja' => $kayttaja));
     }
 

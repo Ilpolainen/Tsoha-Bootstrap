@@ -24,8 +24,8 @@
                     <p><br></p>
                     {% for tag in tagit %}
                     <p>
-                        <input type="checkbox" name="{{tag}}">
-                        {{tag}}
+                        <input type="checkbox" name="{{tag.id}}">
+                        {{tag.kiinnostus}}
                     </p>
                     {% endfor %}
                 </div>

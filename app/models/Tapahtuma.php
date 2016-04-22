@@ -37,7 +37,7 @@ class Tapahtuma extends BaseModel {
                 'tapahtuman_luoja' => $row['tapahtuman_luoja']
             ));           
         }
-        Kint::dump($tapahtumat);
+//        Kint::dump($tapahtumat);
         return $tapahtumat;
     }
 

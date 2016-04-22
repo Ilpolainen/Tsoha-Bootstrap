@@ -16,11 +16,9 @@ class KiinnostusController extends BaseController {
     //put your code here
     public static function naytaKiinnostustagit() {
         $kiinnostustagit = Kiinnostustagi::findAll();
-        $tagit = array();
-        foreach ($kiinnostustagit as $tag) {
-            $tagit[] = $tag->kiinnostus;
-        }
-        View::make('kiinnostukset.html', array('tagit' => $tagit));
+        
+        View::make('kiinnostukset.html', array('tagit' => $kiinnostustagit));
+        
     }
 
     public static function naytaKiinnostuksenLuonti() {
@@ -44,8 +42,32 @@ class KiinnostusController extends BaseController {
         $kiinnostukset = Kiinnostustagi::findAll();
         $checkBoxLista = $_POST;
         foreach ($checkBoxLista as $key => $value) {
-            
+            foreach ($kiinnostukset as $kiinnostus) {
+                $kk = new Kayttajan_kiinnostus(array('kayttaja' => $kayttaja->id, 'kiinnostus' => $kiinnostus->id));                
+                if ($key == $kiinnostus->id && !$kk->onJoOlemassa()) {
+//                    Kint::dump($kiinnostus);
+                    $kk->tallenna();
+                }
+            }
         }
+        
+        $kayttajanKomplementti = array();
+        foreach ($kiinnostukset as $kiinnostus) {
+            $kayttajanKomplementti[] = $kiinnostus->id;
+        }
+//        Kint::dump($checkBoxLista);
+        foreach ($checkBoxLista as $key => $value) {
+            unset($kayttajanKomplementti[$key - 1]);
+        }
+        
+//        Kint::dump($kayttajanKomplementti);
+       
+        
+        foreach ($kayttajanKomplementti as $kiinnostusId) {
+            $kk = new Kayttajan_kiinnostus(array('kayttaja' => $kayttaja->id, 'kiinnostus' => $kiinnostusId));
+            $kk->poistaArvoilla();
+        }
+        Redirect::to('/julkinenprofiili/' . $kayttaja->id);
     }
 
 }

@@ -32,7 +32,7 @@ class Kiinnostustagi extends BaseModel {
 
         return $tagit;
     }
-    
+
     public function tallenna() {
         $query = DB::connection()->prepare('INSERT INTO Kiinnostustagi (kiinnostus) VALUES (:kiinnostus) RETURNING id');
         $query->execute(array('kiinnostus' => $this->kiinnostus));
@@ -50,7 +50,6 @@ class Kiinnostustagi extends BaseModel {
         return true;
     }
 
-
     public static function find($id) {
         $query = DB::connection()->prepare("SELECT * FROM Kiinnostustagi WHERE id = :id LIMIT 1");
         $query->execute(array('id' => $id));
@@ -63,6 +62,15 @@ class Kiinnostustagi extends BaseModel {
         return $tagi;
     }
 
+    public static function findByKayttaja($id) {
+        $kookoot = Kayttajan_kiinnostus::findByKayttaja($id);
+        $kiinnostukset = array();
+        foreach ($kookoot as $kk) {
+            
+            $kiinnostukset[] = self::find($kk->kiinnostus);
+        }
+        return $kiinnostukset;
+    }
 
     public function validateKiinnostus() {
         $errors = array();

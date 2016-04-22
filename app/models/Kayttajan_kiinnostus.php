@@ -32,17 +32,25 @@ class Kayttajan_kiinnostus extends BaseModel {
     }
 
      public static function findByKayttaja($id) {
-        $query = DB::connection()->prepare("SELECT * FROM Kayttajan_kiinnostus WHERE kayttaja = :id LIMIT 1");
+//         Kint::dump($id);
+        $query = DB::connection()->prepare("SELECT * FROM Kayttajan_kiinnostus WHERE kayttaja = :id");
         $query->execute(array('id' => $id));
         $rows = $query->fetchAll();
-        $kiinnostukset = array();
+        $kookoot = array();
+//        Kint::dump($kiinnostukset);
+       
+        
         foreach ($rows as $row) {
             if ($row) {
-                $tagi = new Kiinnostustagi(array('id' => $row['id'], 'kiinnostus' => $row['kiinnostus']));
-                $kiinnostukset[] = $tagi;
+                $kk = new Kayttajan_kiinnostus(array('id' => $row['id'], 'kayttaja' => $row['kayttaja'] , 'kiinnostus' => $row['kiinnostus']));
+//                Kint::dump($tagi);
+                
+                $kookoot[] = $kk;
             }
         }
-        return $kiinnostukset;
+//         Kint::dump($kookoot);
+//       die();
+        return $kookoot;
     }
 
     public static function findAllByTagi($id) {
@@ -65,8 +73,8 @@ class Kayttajan_kiinnostus extends BaseModel {
     }
 
      public function onJoOlemassa() {
-        $query = DB::connection()->prepare('SELECT * FROM Kayttajan_kiinnostus WHERE kiinnostus = :kiinnostus');
-        $query->execute(array("kiinnostus" => $this->kiinnostus));
+        $query = DB::connection()->prepare('SELECT * FROM Kayttajan_kiinnostus WHERE kiinnostus = :kiinnostus AND kayttaja = :kayttaja');
+        $query->execute(array("kiinnostus" => $this->kiinnostus, "kayttaja" => $this->kayttaja));
         $row = $query->fetch();
         if ($row == null) {
             return false;
@@ -74,9 +82,16 @@ class Kayttajan_kiinnostus extends BaseModel {
         return true;
     }
     
-    public function poista() {
-        $query = DB::connection()->prepare('DELETE FROM Kayttajan_kiinnostus WHERE id = :id');
-        $query->execute(array('id' => $this->id));
+//    public function poista() {
+//        $query = DB::connection()->prepare('DELETE FROM Kayttajan_kiinnostus WHERE id = :id');
+//        $query->execute(array('id' => $this->id));
+//    }
+    
+    public function poistaArvoilla() {
+        $query = DB::connection()->prepare('DELETE FROM Kayttajan_kiinnostus WHERE kayttaja = :kayttaja AND  kiinnostus = :kiinnostus');
+        $query->execute(array('kayttaja' => $this->kayttaja, 'kiinnostus' => $this->kiinnostus));
     }
+    
+//   
     //put your code here
 }
