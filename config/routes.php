@@ -4,6 +4,10 @@ $routes->get('/', function() {
     KayttajaController::naytaEtusivu();
 });
 
+$routes->get('/etusivu', function() {
+    KayttajaController::naytaEtusivu();
+});
+
 $routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
 });

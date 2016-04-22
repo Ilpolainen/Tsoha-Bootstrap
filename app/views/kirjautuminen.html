@@ -18,11 +18,19 @@
                         <label>Käyttäjätunnus:</label>
                         <input type="text" class="form-control" name="kayttajatunnus"  placeholder="Käyttäjätunnus">
                     </div>
-                    <div class="form-group">
+                    <p>
+                    
                         <label >Salasana:</label>   
-                        <input type="password" class="form-control" size="10" maxlength="10" name="salasana" placeholder="Salasana"   
-                    </div>
-                    <button type="submit" class="btn btn-primary">Kirjaudu sisään</button>
+                        <input type="password" class="form-control" size="10" maxlength="16" name="salasana" placeholder="Salasana"   
+                  
+                    </p>
+                    <p>
+                        <button type="submit" class="btn btn-success">Kirjaudu sisään</button>
+                    </p>
+                    <p>
+                        <text>Eikö sinulla vielä ole tiliä? Luo tästä uusi:</text><br><br>
+                        <a href="{{base_path}}/tilinluonti" class="btn btn-primary">Luo käyttäjätili</a> 
+                    </p>
                 </div>
 
             </div>
@@ -31,18 +39,7 @@
 
 
 
-    <div class="container">
-        <div class="col-xs-2">
-            <form>
-                <div class="form-group">
-                    <div>
-                        <text>Eikö sinulla vielä ole tiliä? Luo tästä uusi:</text><br><br>
-                        <button  type="submit" class="btn btn-primary">Luo käyttäjätili</button> 
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+    
     <br>
     <br>
     <br>
