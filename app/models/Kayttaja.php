@@ -49,11 +49,13 @@ class Kayttaja extends BaseModel {
         return $kayttajat;
     }
 
-    public static function find($id) {
+    public static function find($kid) {
+        $id = intval($kid);
+        
         $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
         $row = $query->fetch();
-
+        $kayttaja = null;
         if ($row) {
             $kayttaja = new Kayttaja(array('id' => $row['id'],
                 'etunimi' => $row['etunimi'],

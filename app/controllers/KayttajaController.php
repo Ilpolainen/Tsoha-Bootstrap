@@ -21,8 +21,10 @@ class KayttajaController extends BaseController {
 
     public function julkinenprofiili($id) {
         self::check_logged_in();
+        Kint::dump($id);
+        $kayttajaid = intval($id);
         $kayttaja = Kayttaja::find($id);
-        $kiinnostukset = Kayttajan_kiinnostus::findByKayttaja($id);
+        $kiinnostukset = Kayttajan_kiinnostus::findByKayttaja($kayttajaid);
         View::make('julkinenprofiili.html', array('kiinnostukset' => $kiinnostukset, 'kayttaja' => $kayttaja));
     }
 

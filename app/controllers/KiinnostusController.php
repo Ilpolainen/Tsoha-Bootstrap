@@ -15,7 +15,11 @@ class KiinnostusController extends BaseController {
 
     //put your code here
     public static function naytaKiinnostustagit() {
-        $tagit = Kiinnostustagi::findAll();
+        $kiinnostustagit = Kiinnostustagi::findAll();
+        $tagit = array();
+        foreach ($kiinnostustagit as $tag) {
+            $tagit[] = $tag->kiinnostus;
+        }
         View::make('kiinnostukset.html', array('tagit' => $tagit));
     }
 
@@ -38,16 +42,9 @@ class KiinnostusController extends BaseController {
     public static function paivitaKiinnostukset() {
         $kayttaja = self::get_user_logged_in();
         $kiinnostukset = Kiinnostustagi::findAll();
-        $totuusarvot = $_POST;
-        foreach ($kiinnostukset as $kiinnostus) {
-            $kk = new Kayttajan_kiinnostus($kayttaja->id, $kiinnostus->id);
-            if (!$totuusarvot[$kiinnostus->kiinnostus]) {
-                $kk->poista();
-            } else {
-                if (!$kk->onJoOlemassa()) {
-                     $kk->tallenna();
-                }              
-            }
+        $checkBoxLista = $_POST;
+        foreach ($checkBoxLista as $key => $value) {
+            
         }
     }
 
