@@ -114,5 +114,8 @@ $routes->post('/tapahtumasivu/:id/poistaIlmo', function($id) {
     OsallistumisController::poistaIlmo($id);
 });
 
+$routes->get('/tapahtumasivuModattu', function() {
+    TapahtumaController::naytaModattuSivu();
+});
 
 

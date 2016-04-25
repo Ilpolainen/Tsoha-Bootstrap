@@ -32,6 +32,7 @@ class Kayttajan_kiinnostus extends BaseModel {
     }
 
      public static function findByKayttaja($id) {
+         
 //         Kint::dump($id);
         $query = DB::connection()->prepare("SELECT * FROM Kayttajan_kiinnostus WHERE kayttaja = :id");
         $query->execute(array('id' => $id));

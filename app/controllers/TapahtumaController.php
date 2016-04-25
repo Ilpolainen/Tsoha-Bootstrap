@@ -108,6 +108,53 @@ class TapahtumaController extends BaseController {
         $tagit = Kiinnostustagi::findAll();
         View::make('tapahtumanmuokkaus.html', array('tapahtuma' => $tapahtuma, 'tagit' => $tagit));
     }
+    
+    public static function naytaModattuSivu() {
+        $kayttaja = self::get_user_logged_in();
+        $kayttajanTagit = Kiinnostustagi::findByKayttaja($kayttaja->id);
+        $tapahtumat = Tapahtuma::findAll();
+        $valitut = array();
+        foreach ($kayttajanTagit as  $kaytTag) {
+            foreach ($tapahtumat as $key => $tapahtuma) {
+                $tapahTagit = Kiinnostustagi::findByTapahtuma($tapahtuma->id);
+                $loytyi = false;
+                foreach ($tapahTagit as $tag) {
+                    if ($tag->id == $kaytTag->id) {
+                        $loytyi = true;
+                        break;
+                    }
+                }
+                if ($loytyi) {
+                    $valitut[] = $tapahtuma;
+                unset($tapahtumat[$key]);
+                }            
+            }
+        }
+        $laajennetut = array();
+        foreach ($valitut as $tapahtuma) {
+            $osallistuminen = false;
+            $onLuoja = false;
+            if (Osallistuminen::isAttending($kayttaja->id, $tapahtuma->id)) {
+                $osallistuminen = true;
+            }
+            if ($kayttaja->id == $tapahtuma->tapahtuman_luoja) {
+                $onLuoja = true;
+            }
+            $laajennetut[] = array(
+                'id' => $tapahtuma->id,
+                'tapahtuman_nimi' => $tapahtuma->tapahtuman_nimi,
+                'lyhyt_kuvaus' => $tapahtuma->lyhyt_kuvaus,
+                'pvm' => $tapahtuma->pvm,
+                'kellonaika' => $tapahtuma->kellonaika,
+                'tapahtumapaikka' => $tapahtuma->tapahtumapaikka,
+                'osallistuminen' => $osallistuminen,
+                'onLuoja' => $onLuoja,
+                'kirjautunut' => $kayttaja
+            );
+        }
+        Kint::dump($laajennetut);
+        View::make('tapahtumat.html', array('tapahtumat' => $laajennetut));
+    }
 
     public static function update($id) {
         $parametrit = $_POST;

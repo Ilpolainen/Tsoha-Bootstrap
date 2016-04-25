@@ -54,7 +54,7 @@ class Kiinnostustagi extends BaseModel {
         $query = DB::connection()->prepare("SELECT * FROM Kiinnostustagi WHERE id = :id LIMIT 1");
         $query->execute(array('id' => $id));
         $row = $query->fetch();
-
+        $tagi = null;
         if ($row) {
             $tagi = new Kiinnostustagi(array('id' => $row['id'], 'kiinnostus' => $row['kiinnostus']));
         }
@@ -81,6 +81,7 @@ class Kiinnostustagi extends BaseModel {
 
     public static function findByTapahtuma($id) {
         $tat = Tapahtuman_aihe::findAllByTapahtuma($id);
+        $tagit = array();
         foreach ($tat as $ta) {
             $tagit[] = new Kiinnostustagi(array(
                 $kiinnostus =  self::find($ta->aihe),
