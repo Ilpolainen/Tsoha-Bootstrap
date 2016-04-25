@@ -69,5 +69,18 @@ class KiinnostusController extends BaseController {
         }
         Redirect::to('/julkinenprofiili/' . $kayttaja->id);
     }
+    
+     public static function haeTagitTapahtumaIdlla($id) {
+        $teeteet = Tapahtuman_aihe::findAllByTapahtuma($id);
+        $tagit = array();
+        foreach ($teeteet as $tt) {
+            $tagi = self::
+            $tagit[] = $tagi;
+        }
+        
+        return $tagit;
+    }
+    
+    
 
 }

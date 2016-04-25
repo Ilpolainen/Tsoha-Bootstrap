@@ -117,6 +117,7 @@ class Tapahtuma extends BaseModel {
         }
         return $errors;
     }
+    
 
     public static function findByParams($params) {
         foreach ($params as $par) {

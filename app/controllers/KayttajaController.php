@@ -19,7 +19,7 @@ class KayttajaController extends BaseController {
         View::make('kayttajienlistaus.html', array('kayttajat' => $kayttajat));
     }
 
-    public function julkinenprofiili($id) {
+    public static function julkinenprofiili($id) {
         self::check_logged_in();
 //        
         $kayttajaid = intval($id);
@@ -54,7 +54,7 @@ class KayttajaController extends BaseController {
         Redirect::to('/etusivu', array('message' => 'Profiili lisättiin onnistuneesti!'));
     }
 
-    public function naytaTilinluontilomake() {
+    public static function naytaTilinluontilomake() {
         View::make('tilinluonti.html');
     }
 
@@ -112,8 +112,7 @@ class KayttajaController extends BaseController {
             View::make('/kirjautuminen.html', array('error' => 'Väärä käyttäjätunnus tai salasana!', 'kayttajatunnus' => $params['kayttajatunnus']));
         } else {
             $_SESSION['kayttaja'] = $kayttaja->id;
-
-            Redirect::to('/julkinenprofiili/:id', array('message' => 'Tervetuloa takaisin! ' . $kayttaja->kayttajatunnus));
+                self::julkinenprofiili($kayttaja->id);
         }
     }
 

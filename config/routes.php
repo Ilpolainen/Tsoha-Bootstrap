@@ -85,9 +85,11 @@ $routes->get('/tapahtumasivu/:id/', function($id) {
     TapahtumaController::naytaTapahtuma($id);
 });
 
+$routes->post('/naytaTapahtumanmuokkaus/:id/', function($id) {
+    TapahtumaController::naytaTapahtumanmuokkaussivu($id);
+});
 
-
-$routes->get('/tapahtumanmuokkaus/:id/', function($id) {
+$routes->get('/naytaTapahtumanmuokkaus/:id/', function($id) {
     TapahtumaController::naytaTapahtumanmuokkaussivu($id);
 });
 

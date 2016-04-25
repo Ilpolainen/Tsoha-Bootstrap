@@ -22,9 +22,16 @@
             <li><strong>Tapahtumanluoja: </strong>{{tapahtuma.tapahtuman_luoja}}</li>
         </ul>
         <br>
-        <ul><li><label> Kuvaus: </label><p>{{tapahtuma.lyhyt_kuvaus}}</p></li></ul>
+        <label> Kuvaus: </label>
+        <ul><li>{{tapahtuma.lyhyt_kuvaus}}</li></ul>
         <br>
         <br>
+        <label>Aihe-tagit: </label>
+        
+        {% for tagi in tagit %}
+        <ul><li>{{tagi}}</li> </ul>
+        {% endfor %}
+       
     </div>
     {% if tapahtuma.osallistuminen %}
     <form method="post" action="{{base_path}}/tapahtumasivu/{{tapahtuma.id}}/poistaIlmo">
@@ -39,8 +46,14 @@
         </div>
     </form>
     {% endif %}
+    <br>
+    <br>
     {% if tapahtuma.onLuoja %}
-    <a href="{{base_path}}/tapahtumanmuokkaus/{{tapahtuma.id}}" class="btn btn-default">Muokkaa Tapahtumaa</a>
+    <form method="post" action="{{base_path}}/naytaTapahtumanmuokkaus/{{tapahtuma.id}}">
+        <div class="col-xs-5">
+            <button type="submit" class="btn btn-primary">Muokkaa Tapahtumaa</button>
+        </div>
+    </form>   
     {% endif %}
     <br>
     <br>

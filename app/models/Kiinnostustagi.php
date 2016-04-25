@@ -66,7 +66,7 @@ class Kiinnostustagi extends BaseModel {
         $kookoot = Kayttajan_kiinnostus::findByKayttaja($id);
         $kiinnostukset = array();
         foreach ($kookoot as $kk) {
-            
+
             $kiinnostukset[] = self::find($kk->kiinnostus);
         }
         return $kiinnostukset;
@@ -77,6 +77,17 @@ class Kiinnostustagi extends BaseModel {
         if (!$this->validate_string_length($this->kiinnostus, 2)) {
             $errors[] = 'kiinnostuksen nimen tulee olla vähintään 2 merkkiä pitkä';
         }
+    }
+
+    public static function findByTapahtuma($id) {
+        $tat = Tapahtuman_aihe::findAllByTapahtuma($id);
+        foreach ($tat as $ta) {
+            $tagit[] = new Kiinnostustagi(array(
+                $kiinnostus =  self::find($ta->aihe),
+                'id' => $kiinnostus->id,
+                'kiinnostus' => $kiinnostus->kiinnostus));
+        }
+        return $tagit;
     }
 
     //put your code here
