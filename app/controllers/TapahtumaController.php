@@ -15,7 +15,6 @@ class TapahtumaController extends BaseController {
 
     public static function luoUusiTapahtuma() {
         $params = $_POST;
-
         $tapahtuma = new Tapahtuma(array(
             'tapahtuman_nimi' => $params['tapahtuman_nimi'],
             'tapahtumapaikka' => $params['tapahtumapaikka'],
@@ -24,20 +23,17 @@ class TapahtumaController extends BaseController {
             'kellonaika' => $params['kellonaika'],
             'tapahtuman_luoja' => self::get_user_logged_in()->id
         ));
-        
         $tapahtuma->tallenna();
         Tapahtuman_aiheController::paivitaAiheet($tapahtuma->id);
-        
         Redirect::to('/tapahtumat', array('message' => 'Tapahtuma lisättiin onnistuneesti!'));
     }
 
     public static function naytaTapahtumatSivu() {
         self::check_logged_in();
+        $kirjautunut = self::get_user_logged_in();
         $tapahtumat = Tapahtuma::findAll();
         $laajennetut = array();
-
         foreach ($tapahtumat as $tapahtuma) {
-            $kirjautunut = self::get_user_logged_in();
             $osallistuminen = false;
             $onLuoja = false;
             if (Osallistuminen::isAttending($kirjautunut->id, $tapahtuma->id)) {
@@ -46,17 +42,7 @@ class TapahtumaController extends BaseController {
             if ($kirjautunut->id == $tapahtuma->tapahtuman_luoja) {
                 $onLuoja = true;
             }
-            $laajennetut[] = array(
-                'id' => $tapahtuma->id,
-                'tapahtuman_nimi' => $tapahtuma->tapahtuman_nimi,
-                'lyhyt_kuvaus' => $tapahtuma->lyhyt_kuvaus,
-                'pvm' => $tapahtuma->pvm,
-                'kellonaika' => $tapahtuma->kellonaika,
-                'tapahtumapaikka' => $tapahtuma->tapahtumapaikka,
-                'osallistuminen' => $osallistuminen,
-                'onLuoja' => $onLuoja,
-                'kirjautunut' => $kirjautunut
-            );
+            $laajennetut[] = array('id' => $tapahtuma->id, 'tapahtuman_nimi' => $tapahtuma->tapahtuman_nimi, 'lyhyt_kuvaus' => $tapahtuma->lyhyt_kuvaus, 'pvm' => $tapahtuma->pvm, 'kellonaika' => $tapahtuma->kellonaika, 'tapahtumapaikka' => $tapahtuma->tapahtumapaikka, 'osallistuminen' => $osallistuminen, 'onLuoja' => $onLuoja, 'kirjautunut' => $kirjautunut);
         }
         View::make('tapahtumat.html', array('tapahtumat' => $laajennetut));
     }
@@ -75,25 +61,12 @@ class TapahtumaController extends BaseController {
         if (Osallistuminen::isAttending($kirjautunut, $tapahtuma->id)) {
             $osallistuminen = true;
         }
-        $laajennettu = array(
-            'id' => $tapahtuma->id,
-            'tapahtuman_nimi' => $tapahtuma->tapahtuman_nimi,
-            'lyhyt_kuvaus' => $tapahtuma->lyhyt_kuvaus,
-            'pvm' => $tapahtuma->pvm,
-            'kellonaika' => $tapahtuma->kellonaika,
-            'tapahtumapaikka' => $tapahtuma->tapahtumapaikka,
-            'osallistuminen' => $osallistuminen,
-            'onLuoja' => $onLuoja,
-            'tapahtuman_luoja' => $luoja->kayttajatunnus,
-            'kirjautunut' => $kirjautunut
-        );
-       
+        $laajennettu = array('id' => $tapahtuma->id, 'tapahtuman_nimi' => $tapahtuma->tapahtuman_nimi, 'lyhyt_kuvaus' => $tapahtuma->lyhyt_kuvaus, 'pvm' => $tapahtuma->pvm, 'kellonaika' => $tapahtuma->kellonaika, 'tapahtumapaikka' => $tapahtuma->tapahtumapaikka, 'osallistuminen' => $osallistuminen, 'onLuoja' => $onLuoja, 'tapahtuman_luoja' => $luoja->kayttajatunnus, 'kirjautunut' => $kirjautunut);
         $kiinnostustagit = Kiinnostustagi::findByTapahtuma($id);
         $tagit = array();
         foreach ($kiinnostustagit as $tagi) {
             $tagit[] = $tagi->kiinnostus;
         }
-        Kint::dump($tagit);
         View::make('tapahtumasivu.html', array('tapahtuma' => $laajennettu, 'tagit' => $tagit));
     }
 
@@ -103,33 +76,15 @@ class TapahtumaController extends BaseController {
     }
 
     public static function naytaTapahtumanmuokkaussivu($id) {
-       
+
         $tapahtuma = Tapahtuma::find($id);
         $tagit = Kiinnostustagi::findAll();
         View::make('tapahtumanmuokkaus.html', array('tapahtuma' => $tapahtuma, 'tagit' => $tagit));
     }
-    
+
     public static function naytaModattuSivu() {
         $kayttaja = self::get_user_logged_in();
-        $kayttajanTagit = Kiinnostustagi::findByKayttaja($kayttaja->id);
-        $tapahtumat = Tapahtuma::findAll();
-        $valitut = array();
-        foreach ($kayttajanTagit as  $kaytTag) {
-            foreach ($tapahtumat as $key => $tapahtuma) {
-                $tapahTagit = Kiinnostustagi::findByTapahtuma($tapahtuma->id);
-                $loytyi = false;
-                foreach ($tapahTagit as $tag) {
-                    if ($tag->id == $kaytTag->id) {
-                        $loytyi = true;
-                        break;
-                    }
-                }
-                if ($loytyi) {
-                    $valitut[] = $tapahtuma;
-                unset($tapahtumat[$key]);
-                }            
-            }
-        }
+        $valitut = Tapahtuma::etsiKayttajaaKiinnostavat(intval($kayttaja->id));
         $laajennetut = array();
         foreach ($valitut as $tapahtuma) {
             $osallistuminen = false;
@@ -140,68 +95,35 @@ class TapahtumaController extends BaseController {
             if ($kayttaja->id == $tapahtuma->tapahtuman_luoja) {
                 $onLuoja = true;
             }
-            $laajennetut[] = array(
-                'id' => $tapahtuma->id,
-                'tapahtuman_nimi' => $tapahtuma->tapahtuman_nimi,
-                'lyhyt_kuvaus' => $tapahtuma->lyhyt_kuvaus,
-                'pvm' => $tapahtuma->pvm,
-                'kellonaika' => $tapahtuma->kellonaika,
-                'tapahtumapaikka' => $tapahtuma->tapahtumapaikka,
-                'osallistuminen' => $osallistuminen,
-                'onLuoja' => $onLuoja,
-                'kirjautunut' => $kayttaja
-            );
+            $laajennetut[] = array('id' => $tapahtuma->id, 'tapahtuman_nimi' => $tapahtuma->tapahtuman_nimi, 'lyhyt_kuvaus' => $tapahtuma->lyhyt_kuvaus, 'pvm' => $tapahtuma->pvm, 'kellonaika' => $tapahtuma->kellonaika, 'tapahtumapaikka' => $tapahtuma->tapahtumapaikka, 'osallistuminen' => $osallistuminen, 'onLuoja' => $onLuoja, 'kirjautunut' => $kayttaja);
         }
-        Kint::dump($laajennetut);
         View::make('tapahtumat.html', array('tapahtumat' => $laajennetut));
     }
 
     public static function update($id) {
         $parametrit = $_POST;
-        Tapahtuman_aiheController::paivitaAiheet($id);
-        $attribuutit = array(
-            'id' => $id,
-            'tapahtuman_nimi' => $parametrit['tapahtuman_nimi'],
-            'lyhyt_kuvaus' => $parametrit['lyhyt_kuvaus'],
-            'pvm' => $parametrit['pvm'],
-            'kellonaika' => $parametrit['kellonaika'],
-            'tapahtumapaikka' => $parametrit['tapahtumapaikka'],
-            'tapahtuman_luoja' => self::get_user_logged_in()->id
-        );
-
-//
-//        // Alustetaan Game-olio käyttäjän syöttämillä tiedoilla
+        Tapahtuman_aiheController::paivitaAiheet(intval($id));
+        $attribuutit = array('id' => $id, 'tapahtuman_nimi' => $parametrit['tapahtuman_nimi'], 'lyhyt_kuvaus' => $parametrit['lyhyt_kuvaus'], 'pvm' => $parametrit['pvm'], 'kellonaika' => $parametrit['kellonaika'], 'tapahtumapaikka' => $parametrit['tapahtumapaikka'], 'tapahtuman_luoja' => self::get_user_logged_in()->id);
         $tapahtuma = new Tapahtuma($attribuutit);
-        Kint::dump($attribuutit);
         $virheet = $tapahtuma->errors();
-
         if (count($virheet) > 0) {
-            Kint::dump($virheet);
             View::make('tapahtumanmuokkaus.html', array('virheet' => $virheet, 'attribuutit' => $attribuutit));
         } else {
-
-            // Kutsutaan alustetun olion update-metodia, joka päivittää pelin tiedot tietokannassa
             $tapahtuma->update();
-
             Redirect::to('/tapahtumat', array('message' => 'Tapahtumaa muokattiin onnistuneesti!'));
         }
     }
 
     public static function poista($id) {
-        // Alustetaan Game-olio annetulla id:llä
         $tapahtuma = new Tapahtuma(array('id' => $id));
-        // Kutsutaan Game-malliluokan metodia destroy, joka poistaa pelin sen id:llä
         $tapahtuma->poista();
-
-        // Ohjataan käyttäjä pelien listaussivulle ilmoituksen kera
         Redirect::to('/tapahtumat', array('message' => 'Tapahtuma on poistettu onnistuneesti!'));
     }
-    
 
     public static function osallistu($tapahtuma_id) {
-        if(!isset($_SESSION['user'])){
-      Redirect::to('/kirjautuminen', array('message' => 'Kirjaudu ensin sisään!'));
-    }
+        if (!isset($_SESSION['user'])) {
+            Redirect::to('/kirjautuminen', array('message' => 'Kirjaudu ensin sisään!'));
+        }
         $osallistuminen = new Osallistuminen(array('kayttaja_id' => self::get_user_logged_in()->id, 'tapahtuma_id' => $tapahtuma_id));
         $osallistuminen->save();
         Redirect::to('/tapahtumat');
@@ -224,7 +146,6 @@ class TapahtumaController extends BaseController {
         View::make('tapahtumanpoisto.html', array('tapahtuma' => $tapahtuma));
     }
 
-    
 }
 
 //put your code here

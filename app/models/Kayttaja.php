@@ -128,7 +128,6 @@ class Kayttaja extends BaseModel {
         if (!$this->validate_max_string_length($this->etunimi, 50)) {
             $errors[] = 'Etunimi saa olla enintään 50 merkkiä pitkä';
         }
-        return $errors;
          if (!$this->validate_min_string_length($this->sukunimi, 2)) {
             $errors[] = 'Sukunimen tulee olla vähintään 2 merkkiä pitkä';
         }

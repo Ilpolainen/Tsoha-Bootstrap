@@ -32,8 +32,7 @@ class Tapahtuman_aihe extends BaseModel {
         return $aiheet;
     }
     
-     public static function findAllByTapahtuma($id) {
-          
+     public static function findAllByTapahtuma($id) {          
         $query = DB::connection()->prepare("SELECT * FROM Tapahtuman_aihe WHERE tapahtuma = :tapahtuma");
         $query->execute(array('tapahtuma' => $id));
         $rows = $query->fetchAll();
@@ -70,6 +69,14 @@ class Tapahtuman_aihe extends BaseModel {
         $query = DB::connection()->prepare('INSERT INTO Tapahtuman_aihe (tapahtuma, aihe) VALUES (:tapahtuma, :aihe) RETURNING id');
         $query->execute(array('tapahtuma' => $this->tapahtuma, 'aihe' => $this->aihe));
         $this->id = $query->fetch();
+    }
+    
+    public static function poistaKaikkiTapahtumanAiheet($tapahtumaId) {
+        
+        
+        $query = DB::connection()->prepare('DELETE FROM Tapahtuman_aihe WHERE tapahtuma = :tapahtuma');
+        $query->execute(array('tapahtuma' => $tapahtumaId));
+        
     }
     
     public function poistaArvoilla() {

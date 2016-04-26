@@ -35,7 +35,7 @@ class Tapahtuma extends BaseModel {
                 'kellonaika' => $row['kellonaika'],
                 'tapahtumapaikka' => $row['tapahtumapaikka'],
                 'tapahtuman_luoja' => $row['tapahtuman_luoja']
-            ));           
+            ));
         }
 //        Kint::dump($tapahtumat);
         return $tapahtumat;
@@ -69,12 +69,12 @@ class Tapahtuma extends BaseModel {
     public function update() {
         $query = DB::connection()->prepare('UPDATE Tapahtuma SET tapahtuman_nimi = :tapahtuman_nimi, lyhyt_kuvaus = :lyhyt_kuvaus, pvm = :pvm, kellonaika = :kellonaika, tapahtumapaikka = :tapahtumapaikka, tapahtuman_luoja = :tapahtuman_luoja WHERE id = :id');
         $query->execute(array(
-            'id' => $this->id, 
-            'tapahtuman_nimi' => $this->tapahtuman_nimi, 
+            'id' => $this->id,
+            'tapahtuman_nimi' => $this->tapahtuman_nimi,
             'lyhyt_kuvaus' => $this->lyhyt_kuvaus,
-            'pvm' => $this->pvm, 
-            'kellonaika' => $this->kellonaika, 
-            'tapahtumapaikka' => $this->tapahtumapaikka, 
+            'pvm' => $this->pvm,
+            'kellonaika' => $this->kellonaika,
+            'tapahtumapaikka' => $this->tapahtumapaikka,
             'tapahtuman_luoja' => $this->tapahtuman_luoja));
     }
 
@@ -117,17 +117,27 @@ class Tapahtuma extends BaseModel {
         }
         return $errors;
     }
-    
 
-    public static function findByParams($params) {
-        foreach ($params as $par) {
-            
+    public static function etsiKayttajaaKiinnostavat($kayttajaId) {
+        $query = DB::connection()->prepare('SELECT DISTINCT Tapahtuma.id, tapahtuman_nimi, tapahtumapaikka, '
+                . 'Tapahtuma.lyhyt_kuvaus, Tapahtuma.pvm, kellonaika, tapahtuman_luoja FROM Tapahtuma '
+                . 'JOIN Tapahtuman_aihe ON tapahtuma = Tapahtuma.id '
+                . 'JOIN Kiinnostustagi ON aihe = Kiinnostustagi.id '
+                . 'JOIN  Kayttajan_kiinnostus ON Kiinnostustagi.id = Kayttajan_kiinnostus.kiinnostus '
+                . 'JOIN Kayttaja ON Kayttaja.id = :kayttajaId');
+        $query->execute(array('kayttajaId' => $kayttajaId));
+        $rows = $query->fetchAll();
+        $tapahtumat = array();
+        foreach ($rows as $row) {
+            $tapahtumat[] = new Tapahtuma(array('id' => $row['id'],
+                'tapahtuman_nimi' => $row['tapahtuman_nimi'],
+                'lyhyt_kuvaus' => $row['lyhyt_kuvaus'],
+                'pvm' => $row['pvm'],
+                'kellonaika' => $row['kellonaika'],
+                'tapahtumapaikka' => $row['tapahtumapaikka'],
+                'tapahtuman_luoja' => $row['tapahtuman_luoja']
+            ));
         }
+        return $tapahtumat;
     }
-
-    public static function constructQuery($params) {
-        
-    }
-
-    //put your code here
 }

@@ -20,34 +20,13 @@ class Tapahtuman_aiheController extends BaseController {
 
     public static function paivitaAiheet($tapahtumaId) {
         $id = intval($tapahtumaId);
-        
-        $aiheet = Kiinnostustagi::findAll();
-        
         $checkBoxLista = $_POST;
+        Tapahtuman_aihe::poistaKaikkiTapahtumanAiheet($id);
         foreach ($checkBoxLista as $key => $value) {
-            foreach ($aiheet as $aihe) {
-                $ta = new Tapahtuman_aihe(array('tapahtuma' => $id, 'aihe' => $aihe->id));
-                if ($key == $aihe->id && !$ta->onJoOlemassa()) {
-                    $ta->tallenna();
-                }
+            if (is_numeric($key)) {
+                $ta = new Tapahtuman_aihe(array('tapahtuma' => $id, 'aihe' => $key));
+                $ta->tallenna();
             }
-        }
-
-        $tapahtumanKomplementti = array();
-        foreach ($aiheet as $aihe) {
-            $tapahtumanKomplementti[] = $aihe->id;
-        }
-//        Kint::dump($checkBoxLista);
-        foreach ($checkBoxLista as $key => $value) {
-            unset($tapahtumanKomplementti[$key - 1]);
-        }
-
-//        Kint::dump($kayttajanKomplementti);
-
-
-        foreach ($tapahtumanKomplementti as $aihe) {
-            $ta = new Tapahtuman_aihe(array('tapahtuma' => $id, 'aihe' => $aihe));
-            $ta->poistaArvoilla();
         }
         TapahtumaController::naytaTapahtuma($id);
     }

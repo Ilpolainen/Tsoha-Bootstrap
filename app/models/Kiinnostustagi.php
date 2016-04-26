@@ -84,7 +84,7 @@ class Kiinnostustagi extends BaseModel {
         $tagit = array();
         foreach ($tat as $ta) {
             $tagit[] = new Kiinnostustagi(array(
-                $kiinnostus =  self::find($ta->aihe),
+                $kiinnostus = self::find($ta->aihe),
                 'id' => $kiinnostus->id,
                 'kiinnostus' => $kiinnostus->kiinnostus));
         }
