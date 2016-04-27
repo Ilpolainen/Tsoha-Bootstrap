@@ -78,6 +78,11 @@ class Kayttaja extends BaseModel {
         $row = $query->fetch();
         $this->id = $row['id'];
     }
+    
+    public function poista() {
+        $query = DB::connection()->prepare('DELETE FROM Kayttaja WHERE id = :id');
+        $query->execute(array('id' => $this->id));
+    }
 
     public function update() {
         $query = DB::connection()->prepare('UPDATE Kayttaja SET etunimi = :etunimi, sukunimi = :sukunimi, kayttajatunnus = :kayttajatunnus, salasana = :salasana, syntyma_aika = :syntyma_aika, osoite = :osoite, puhelinnumero = :puhelinnumero, email_osoite = :email_osoite, kuvaus = :kuvaus WHERE id = :id');
@@ -110,7 +115,7 @@ class Kayttaja extends BaseModel {
 
     public function validateSyntyma_aika() {
         $errors = array();
-        if (!$this->validate_string_length($this->syntyma_aika, 1)) {
+        if (!$this->validate_min_string_length($this->syntyma_aika, 1)) {
             $errors[] = 'Päivämäärä ei saa olla tyhjä!';
         } else {
             if (!$this->checkIfDate($this->syntyma_aika)) {
@@ -123,40 +128,40 @@ class Kayttaja extends BaseModel {
     public function validateStrings() {
         $errors = array();
         if (!$this->validate_min_string_length($this->etunimi, 2)) {
-            $errors[] = 'Etunimen tulee olla vähintään 2 merkkiä pitkä';
+            $errors[] = 'Etunimen tulee olla vähintään 2 merkkiä pitkä!';
         }
         if (!$this->validate_max_string_length($this->etunimi, 50)) {
-            $errors[] = 'Etunimi saa olla enintään 50 merkkiä pitkä';
+            $errors[] = 'Etunimi saa olla enintään 50 merkkiä pitkä!';
         }
          if (!$this->validate_min_string_length($this->sukunimi, 2)) {
-            $errors[] = 'Sukunimen tulee olla vähintään 2 merkkiä pitkä';
+            $errors[] = 'Sukunimen tulee olla vähintään 2 merkkiä pitkä!';
         }
         if (!$this->validate_max_string_length($this->sukunimi, 50)) {
-            $errors[] = 'Sukunimi saa olla enintään 50 merkkiä pitkä';
+            $errors[] = 'Sukunimi saa olla enintään 50 merkkiä pitkä!';
         }
          if (!$this->validate_min_string_length($this->kayttajatunnus, 4)) {
-            $errors[] = 'Käyttäjätunnuksen tulee olla vähintään 4 merkkiä pitkä';
+            $errors[] = 'Käyttäjätunnuksen tulee olla vähintään 4 merkkiä pitkä!';
         }
         if (!$this->validate_max_string_length($this->kayttajatunnus, 20)) {
-            $errors[] = 'Käyttäjätunnus saa olla enintään 20 merkkiä pitkä';
+            $errors[] = 'Käyttäjätunnus saa olla enintään 20 merkkiä pitkä!';
         }
          if (!$this->validate_min_string_length($this->salasana, 5)) {
-            $errors[] = 'Salasanan tulee olla vähintään 5 merkkiä pitkä';
+            $errors[] = 'Salasanan tulee olla vähintään 5 merkkiä pitkä!';
         }
         if (!$this->validate_max_string_length($this->salasana, 16)) {
-            $errors[] = 'Salasana saa olla enintään 16 merkkiä pitkä';
+            $errors[] = 'Salasana saa olla enintään 16 merkkiä pitkä!';
         }
         if (!$this->validate_max_string_length($this->puhelinnumero, 15)) {
-            $errors[] = 'Puhelinnumero saa olla enintään 15 merkkiä pitkä';
+            $errors[] = 'Puhelinnumero saa olla enintään 15 merkkiä pitkä!';
         }
         if (!$this->validate_max_string_length($this->osoite, 60)) {
-            $errors[] = 'Osoite saa olla enintään 60 merkkiä pitkä';
+            $errors[] = 'Osoite saa olla enintään 60 merkkiä pitkä!';
         }
         if (!$this->validate_max_string_length($this->email_osoite, 50)) {
-            $errors[] = 'Email -osoite saa olla enintään 50 merkkiä pitkä';
+            $errors[] = 'Email -osoite saa olla enintään 50 merkkiä pitkä!';
         }
         if (!$this->validate_max_string_length($this->kuvaus, 300)) {
-            $errors[] = 'Kuvaus saa olla enintään 300 merkkiä pitkä';
+            $errors[] = 'Kuvaus saa olla enintään 300 merkkiä pitkä!';
         }
         return $errors;
     }

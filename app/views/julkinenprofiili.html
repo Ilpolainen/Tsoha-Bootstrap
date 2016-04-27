@@ -4,13 +4,13 @@
 <div class="container kirjautumis-container">
     <br>
     <div class="container">
-       
+
         <br>
         <div class="col-lg-offset-1">
-             <h2>{{kayttaja.kayttajatunnus}}</h2>
-        <br>
-        
-        <br>
+            <h2>{{kayttaja.kayttajatunnus}}</h2>
+            <br>
+
+            <br>
             <div class="checkbox">
 
                 <h4>Kiinnostuksenkohteet:</h4>
@@ -28,6 +28,11 @@
                     <li>{{kayttaja.kuvaus}}</li>
                 </ul>
             </div>
+            <form method="post" action="{{base_path}}/tilinpoistoon/{{kayttaja.id}}">
+                {% if yllapitaja %}
+                <button type="submit" class='btn btn-danger'>Poista</button>
+                {% endif %}
+            </form>
         </div>
         <br>
         <br>

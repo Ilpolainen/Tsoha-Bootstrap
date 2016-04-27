@@ -36,7 +36,7 @@ class BaseModel {
     }
     
     public function validate_max_string_length($string, $length) {
-        if ($string == '' || $string == null || strlen($string) > $length) {
+        if (strlen($string) > $length) {
             return false;
         } else {
             return true;

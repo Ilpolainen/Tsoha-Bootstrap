@@ -7,21 +7,29 @@
         <form method="post" action="{{base_path}}/kiinnostuksenluonti">
             <div class="form-group">
                 <div class="col-xs-5">
-
+                    {% if errors %}
+                    <div class='alert-danger'>
+                        <ul>
+                            {% for error in errors %}
+                            <li>{{error}}</li>
+                            {% endfor %}
+                        </ul> 
+                    </div>
+                    {% endif %}
                     <h2>Haluan luoda seuraavan kiinnostuksenkohteen:</h2>
                     <p>
                         <label>Kiinnostuksenkohde:</label>
                         <input type="text" name="kiinnostus" class="form-control" placeholder="kiinnostuksenkohde">
                     </p>
                     <p>
-                         <button type="submit" class="btn btn-primary">Luo Kohde</button>
+                        <button type="submit" class="btn btn-primary">Luo Kohde</button>
                     </p>
                 </div>
             </div>
         </form>
     </div>
     <br>
-    
+
 
     {% endblock %}
 

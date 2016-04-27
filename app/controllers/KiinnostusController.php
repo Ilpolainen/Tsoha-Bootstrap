@@ -29,8 +29,10 @@ class KiinnostusController extends BaseController {
         $parametrit = $_POST;
         $kiinnostus = $parametrit['kiinnostus'];
         $kiinnostusTagi = new Kiinnostustagi(array('kiinnostus' => $kiinnostus));
-        if ($kiinnostusTagi->onJoOlemassa()) {
-            Redirect::to('/kiinnostukset', array('message' => 'Samanniminen kiinnostus on jo olemassa!'));
+        $errors = $kiinnostusTagi->validateKiinnostus();
+        
+        if (count($errors) > 0) {
+            View::make('kiinnostuksenluonti.html', array('errors' => $errors));
         } else {
             $kiinnostusTagi->tallenna();
             Redirect::to('/kiinnostukset', array('message' => 'Uusi kiinnostus luotu!'));

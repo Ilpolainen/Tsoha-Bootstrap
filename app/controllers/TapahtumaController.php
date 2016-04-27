@@ -23,9 +23,14 @@ class TapahtumaController extends BaseController {
             'kellonaika' => $params['kellonaika'],
             'tapahtuman_luoja' => self::get_user_logged_in()->id
         ));
-        $tapahtuma->tallenna();
-        Tapahtuman_aiheController::paivitaAiheet($tapahtuma->id);
-        Redirect::to('/tapahtumat', array('message' => 'Tapahtuma lisättiin onnistuneesti!'));
+        $errors = $tapahtuma->errors();
+        if (count($errors) > 0) {
+            View::make('tapahtumanluonti.html', array('errors' => $errors));
+        } else {
+            $tapahtuma->tallenna();
+            Tapahtuman_aiheController::paivitaAiheet($tapahtuma->id);
+            Redirect::to('/tapahtumat', array('message' => 'Tapahtuma lisättiin onnistuneesti!'));
+        }
     }
 
     public static function naytaTapahtumatSivu() {

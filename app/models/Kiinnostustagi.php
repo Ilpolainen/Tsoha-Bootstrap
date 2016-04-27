@@ -74,9 +74,16 @@ class Kiinnostustagi extends BaseModel {
 
     public function validateKiinnostus() {
         $errors = array();
-        if (!$this->validate_string_length($this->kiinnostus, 2)) {
-            $errors[] = 'kiinnostuksen nimen tulee olla vähintään 2 merkkiä pitkä';
+        if (!$this->validate_min_string_length($this->kiinnostus, 2)) {
+            $errors[] = 'Kiinnostuksenkohteen nimen tulee olla vähintään 2 merkkiä pitkä!';
         }
+        if (!$this->validate_max_string_length($this->kiinnostus, 30)) {
+            $errors[] = 'Kiinnostuksenkohteen nimi saa olla enintään 30 merkkiä pitkä!';
+        }
+        if ($this->onJoOlemassa()) {
+            $errors[] = 'Samanniminen kiinnostuksenkohde on jo olemassa!';
+        }
+        return $errors;
     }
 
     public static function findByTapahtuma($id) {

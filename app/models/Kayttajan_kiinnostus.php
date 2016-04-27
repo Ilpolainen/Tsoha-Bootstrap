@@ -93,6 +93,8 @@ class Kayttajan_kiinnostus extends BaseModel {
         $query->execute(array('kayttaja' => $this->kayttaja, 'kiinnostus' => $this->kiinnostus));
     }
     
+    
+    
 //   
     //put your code here
 }

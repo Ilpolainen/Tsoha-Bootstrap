@@ -8,6 +8,17 @@
             <div class="form-group">
                 <div class="col-xs-5">
 
+                    {% if errors %}
+                    <div class="alert-danger">
+                        <ul>
+                            {% for error in errors %}
+                            <li>{{error}}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    {% endif %}
+
                     <h2>Luo Tili:</h2>
 
 
@@ -23,7 +34,7 @@
                         <label>Käyttäjätunnus:</label>
                         <input class="form-control" name="kayttajatunnus" placeholder="Käyttäjätunnus">
                     </p>
-                    
+
                     <p>
                         <label>Salasana:</label>
                         <input class="form-control" name="salasana" type="password" placeholder="Salasana">
@@ -34,23 +45,23 @@
                     </p>
                     <p>
                         <label>Syntymä-aika:</label>
-                        <input class="form-control" name="syntyma_aika" placeholder="Syntymä-aika">
+                        <input class="form-control" name="syntyma_aika" placeholder="Muodossa: YYYY-MM-DD">
                     </p>
                     <p>
                         <label>Osoite:</label>
-                        <input class ="form-control" name="osoite" placeholder="Osoite">
+                        <input class ="form-control" name="osoite" placeholder="Osoite (ei pakollinen)">
                     </p>
                     <p>
                         <label>Puhelinnumero:</label>
-                        <input class="form-control" name ="puhelinnumero" placeholder="Puhelinnumero">
+                        <input class="form-control" name ="puhelinnumero" placeholder="Puhelinnumero (ei pakollinen)">
                     </p>
                     <p>
                         <label>Sähköposti:</label>
-                        <input class="form-control" name="email_osoite" placeholder="matti.meikalainen@roskaposti.fi">
+                        <input class="form-control" name="email_osoite" placeholder="matti.meikalainen@roskaposti.fi (ei pakollinen)">
                     </p>
                     <p>
                         <label>Kuvaus itsestäni</label>
-                        <input class="form-control" name="kuvaus" placeholder="Tällainen olen minä.">
+                        <input class="form-control" name="kuvaus" placeholder="Tällainen olen minä. (ei pakollinen)">
                     </p>
                     <p>
                         <button type="submit" class="btn btn-primary">Luo Tili</button>

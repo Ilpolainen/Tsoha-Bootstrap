@@ -19,26 +19,8 @@ class KayttajaController extends BaseController {
         View::make('kayttajienlistaus.html', array('kayttajat' => $kayttajat));
     }
 
-    public static function julkinenprofiili($id) {
-        self::check_logged_in();
-//        
-        $kayttajaid = intval($id);
-//        Kint::dump($kayttajaid);
-     
-        $kayttaja = Kayttaja::find($id);
-//        Kint::dump($kayttaja);
-           
-        $kiinnostukset = Kiinnostustagi::findByKayttaja($kayttajaid);
-        
-//        Kint::dump($kiinnostukset);
-//        die();
-        
-        View::make('julkinenprofiili.html', array('kiinnostukset' => $kiinnostukset, 'kayttaja' => $kayttaja));
-    }
-
     public static function luoTili() {
         $params = $_POST;
-
         $kayttaja = new Kayttaja(array('etunimi' => $params['etunimi'],
             'sukunimi' => $params['sukunimi'],
             'kayttajatunnus' => $params['kayttajatunnus'],
@@ -49,9 +31,33 @@ class KayttajaController extends BaseController {
             'email_osoite' => $params['email_osoite'],
             'kuvaus' => $params['kuvaus']
         ));
-        $kayttaja->tallenna();
+        $errors = $kayttaja->errors();
+        if (count($errors) == 0) {
+            $kayttaja->tallenna();
+            Redirect::to('/etusivu', array('message' => 'Profiili lisättiin onnistuneesti!'));
+        } else {
+            View::make('tilinluonti.html', array('errors' => $errors));
+        }
+    }
 
-        Redirect::to('/etusivu', array('message' => 'Profiili lisättiin onnistuneesti!'));
+    public static function poistetaankoTili($id) {
+        $kayttaja = Kayttaja::find($id);
+        View::make('tilinpoisto.html', array('kayttaja' => $kayttaja));
+    }
+    
+    public static function poistaTili($id) {
+        $kayttaja = Kayttaja::find($id);
+        $kayttaja->poista();
+        self::naytaKayttajat();
+    }
+
+    public static function julkinenprofiili($id) {
+        self::check_logged_in();
+        $kayttajaid = intval($id);
+        $kayttaja = Kayttaja::find($id);
+        $yllapitaja = (self::get_user_logged_in()->id == 1);
+        $kiinnostukset = Kiinnostustagi::findByKayttaja($kayttajaid);
+        View::make('julkinenprofiili.html', array('kiinnostukset' => $kiinnostukset, 'kayttaja' => $kayttaja, 'yllapitaja' => $yllapitaja));
     }
 
     public static function naytaTilinluontilomake() {
@@ -112,7 +118,7 @@ class KayttajaController extends BaseController {
             View::make('/kirjautuminen.html', array('error' => 'Väärä käyttäjätunnus tai salasana!', 'kayttajatunnus' => $params['kayttajatunnus']));
         } else {
             $_SESSION['kayttaja'] = $kayttaja->id;
-                self::julkinenprofiili($kayttaja->id);
+            self::julkinenprofiili($kayttaja->id);
         }
     }
 

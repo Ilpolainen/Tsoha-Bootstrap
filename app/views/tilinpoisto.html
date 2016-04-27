@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+
+
+<div class="container kirjautumis-container">
+    <br>
+    <div class="container">
+        <form method="post" action="{{base_path}}/tilinpoisto/{{kayttaja.id}}">
+            <h1>Haluatko varmasti poistaa kayttajan: {{kayttaja.kayttajatunnus}}</h1>
+            <p>
+                <button type="submit" class="btn btn-danger">Poista</button>
+            </p>
+            <p>
+                <a href="{{base_path}}/julkinenprofiili/{{kayttaja.id}}" class="btn btn-primary">En sittenkään</a>
+            </p>
+        </form>
+    </div>
+    <br>
+</div>
+{% endblock %}

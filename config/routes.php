@@ -8,9 +8,7 @@ $routes->get('/etusivu', function() {
     KayttajaController::naytaEtusivu();
 });
 
-$routes->get('/hiekkalaatikko', function() {
-    HelloWorldController::sandbox();
-});
+
 
 $routes->get('/kirjautuminen', function() {
     KayttajaController::naytaKirjautumislomake();
@@ -30,6 +28,14 @@ $routes->get('/tilinluonti', function() {
 
 $routes->post('/tilinluonti', function() {
     KayttajaController::luoTili();
+});
+
+$routes->post('/tilinpoisto/:id', function($id) {
+    KayttajaController::poistaTili($id);
+});
+
+$routes->post('/tilinpoistoon/:id', function($id) {
+    KayttajaController::poistetaankoTili($id);
 });
 
 $routes->get('/omasivu', function() {
