@@ -116,7 +116,7 @@ class Kayttaja extends BaseModel {
     public function validateSyntyma_aika() {
         $errors = array();
         if (!$this->validate_min_string_length($this->syntyma_aika, 1)) {
-            $errors[] = 'Päivämäärä ei saa olla tyhjä!';
+            $errors[] = 'Syntymä-aika ei saa olla tyhjä!';
         } else {
             if (!$this->checkIfDate($this->syntyma_aika)) {
                 $errors[] = 'Syntymä-aika ei ole muotoa YYYY-MM-DD!';
@@ -165,4 +165,6 @@ class Kayttaja extends BaseModel {
         }
         return $errors;
     }
+    
+    
 }

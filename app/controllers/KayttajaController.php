@@ -32,6 +32,9 @@ class KayttajaController extends BaseController {
             'kuvaus' => $params['kuvaus']
         ));
         $errors = $kayttaja->errors();
+        if ($params['salasana'] != $params['salasana2']) {
+            $errors[] = 'Salasanan toisinto ei täsmää salasanan kanssa!';
+        }
         if (count($errors) == 0) {
             $kayttaja->tallenna();
             Redirect::to('/etusivu', array('message' => 'Profiili lisättiin onnistuneesti!'));
@@ -66,14 +69,15 @@ class KayttajaController extends BaseController {
 
     public static function muokkaaProfiilia() {
         self::check_logged_in();
-        $id = self::get_user_logged_in();
+        $id = self::get_user_logged_in()->id;
         $parametrit = $_POST;
 
         $attribuutit = array(
             'id' => $id,
             'etunimi' => $parametrit['etunimi'],
             'sukunimi' => $parametrit['sukunimi'],
-            'kayttajatunnus' => $parametrit['kayttajatunnus'],
+            'kayttajatunnus' => self::get_user_logged_in()->kayttajatunnus,
+            'syntyma_aika' => self::get_user_logged_in()->syntyma_aika,
             'salasana' => $parametrit['salasana'],
             'osoite' => $parametrit['osoite'],
             'puhelinnumero' => $parametrit['puhelinnumero'],
@@ -81,20 +85,16 @@ class KayttajaController extends BaseController {
             'kuvaus' => $parametrit['kuvaus']
         );
 
-//
-//        // Alustetaan Game-olio käyttäjän syöttämillä tiedoilla
         $kayttaja = new Kayttaja($attribuutit);
-        Kint::dump($attribuutit);
-        $virheet = $kayttaja->errors();
-
-        if (count($virheet) > 0) {
-            Kint::dump($virheet);
-            View::make('profiilinmuokkaus.html', array('virheet' => $virheet, 'attribuutit' => $attribuutit));
+        $errors = $kayttaja->errors();
+        if ($parametrit['salasana'] != $parametrit['salasana2']) {
+            $errors[] = 'Salasanan toisinto ei täsmää salasanan kanssa!';
+        }
+        
+        if (count($errors) > 0) { 
+            View::make('profiilinmuokkaus.html', array('errors' => $errors, 'kayttaja' => $kayttaja));
         } else {
-
-            // Kutsutaan alustetun olion update-metodia, joka päivittää pelin tiedot tietokannassa
             $kayttaja->update();
-
             Redirect::to('/tapahtumat', array('message' => 'Profiiliasi muokattiin onnistuneesti!'));
         }
     }
@@ -111,9 +111,7 @@ class KayttajaController extends BaseController {
 
     public static function handle_login() {
         $params = $_POST;
-
         $kayttaja = Kayttaja::authenticate($params['kayttajatunnus'], $params['salasana']);
-
         if (!$kayttaja) {
             View::make('/kirjautuminen.html', array('error' => 'Väärä käyttäjätunnus tai salasana!', 'kayttajatunnus' => $params['kayttajatunnus']));
         } else {
@@ -124,7 +122,6 @@ class KayttajaController extends BaseController {
 
     public static function kirjauduUlos() {
         $_SESSION['kayttaja'] = null;
-
         Redirect::to('/etusivu', array('message' => 'Olet kirjautunut ulos! Tervetuloa uudelleen!'));
     }
 

@@ -110,9 +110,9 @@ class TapahtumaController extends BaseController {
         Tapahtuman_aiheController::paivitaAiheet(intval($id));
         $attribuutit = array('id' => $id, 'tapahtuman_nimi' => $parametrit['tapahtuman_nimi'], 'lyhyt_kuvaus' => $parametrit['lyhyt_kuvaus'], 'pvm' => $parametrit['pvm'], 'kellonaika' => $parametrit['kellonaika'], 'tapahtumapaikka' => $parametrit['tapahtumapaikka'], 'tapahtuman_luoja' => self::get_user_logged_in()->id);
         $tapahtuma = new Tapahtuma($attribuutit);
-        $virheet = $tapahtuma->errors();
-        if (count($virheet) > 0) {
-            View::make('tapahtumanmuokkaus.html', array('virheet' => $virheet, 'attribuutit' => $attribuutit));
+        $errors = $tapahtuma->errors();
+        if (count($errors) > 0) {
+            View::make('tapahtumanmuokkaus.html', array('errors' => $errors, 'attribuutit' => $attribuutit));
         } else {
             $tapahtuma->update();
             Redirect::to('/tapahtumat', array('message' => 'Tapahtumaa muokattiin onnistuneesti!'));
