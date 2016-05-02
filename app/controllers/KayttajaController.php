@@ -47,7 +47,7 @@ class KayttajaController extends BaseController {
         $kayttaja = Kayttaja::find($id);
         View::make('tilinpoisto.html', array('kayttaja' => $kayttaja));
     }
-    
+
     public static function poistaTili($id) {
         $kayttaja = Kayttaja::find($id);
         $kayttaja->poista();
@@ -59,6 +59,9 @@ class KayttajaController extends BaseController {
         $kayttajaid = intval($id);
         $kayttaja = Kayttaja::find($id);
         $yllapitaja = (self::get_user_logged_in()->id == 1);
+        if ($kayttajaid==1) {
+            $yllapitaja = false;
+        }
         $kiinnostukset = Kiinnostustagi::findByKayttaja($kayttajaid);
         View::make('julkinenprofiili.html', array('kiinnostukset' => $kiinnostukset, 'kayttaja' => $kayttaja, 'yllapitaja' => $yllapitaja));
     }
@@ -71,6 +74,14 @@ class KayttajaController extends BaseController {
         self::check_logged_in();
         $id = self::get_user_logged_in()->id;
         $parametrit = $_POST;
+        $uusisalasana = null;
+        $salasana2 = null;
+        if ($parametrit['uusi_salasana'] == '' && $parametrit['salasana2'] == '') {
+            $uusisalasana = self::get_user_logged_in()->salasana;
+            $salasana2 = self::get_user_logged_in()->salasana;
+        } else {
+            $uusisalasana = $parametrit['uusi_salasana'];
+        }
 
         $attribuutit = array(
             'id' => $id,
@@ -87,11 +98,14 @@ class KayttajaController extends BaseController {
 
         $kayttaja = new Kayttaja($attribuutit);
         $errors = $kayttaja->errors();
-        if ($parametrit['salasana'] != $parametrit['salasana2']) {
+        if ($parametrit['salasana'] != self::get_user_logged_in()->salasana) {
+            $errors[] = 'Salasanasi ei ole oikea!';
+        }
+        if ($uusisalasana != $salasana2) {
             $errors[] = 'Salasanan toisinto ei täsmää salasanan kanssa!';
         }
-        
-        if (count($errors) > 0) { 
+
+        if (count($errors) > 0) {
             View::make('profiilinmuokkaus.html', array('errors' => $errors, 'kayttaja' => $kayttaja));
         } else {
             $kayttaja->update();

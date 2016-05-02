@@ -3,34 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/tapahtumanluonti.html</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/controllers/KiinnostusController.php</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/julkinenprofiili.html</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/models/Tapahtuman_aihe.php</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/profiilinmuokkaus.html</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/models/Osallistuminen.php</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/controllers/Tapahtuman_aiheController.php</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/controllers/OsallistumisController.php</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/tapahtumanpoisto.html</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/controllers/KayttajaController.php</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/tapahtumanmuokkaus.html</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/controllers/TapahtumaController.php</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/lib/base_model.php</file>
             <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/models/Kayttaja.php</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/assets/css/site.css</file>
+            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/tapahtumanluonti.html</file>
             <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/models/Kiinnostustagi.php</file>
             <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/models/Kayttajan_kiinnostus.php</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/tapahtumasivu.html</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/base.html</file>
+            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/controllers/KiinnostusController.php</file>
+            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/profiilinmuokkaus.html</file>
+            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/controllers/Tapahtuman_aiheController.php</file>
             <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/kiinnostuksenluonti.html</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/controllers/hello_world_controller.php</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/sql/create_tables.sql</file>
+            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/controllers/KayttajaController.php</file>
             <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/config/routes.php</file>
             <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/tapahtumat.html</file>
             <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/tilinluonti.html</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/models/Tapahtuma.php</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/tilinpoisto.html</file>
-            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/kayttajienlistaus.html</file>
+            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/views/tapahtumanmuokkaus.html</file>
+            <file>file:/home/ad/fshome6/u6/v/vipohjol/Linux/Tsoha/Tsoha-Bootstrap/app/controllers/TapahtumaController.php</file>
         </group>
     </open-files>
 </project-private>

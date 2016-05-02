@@ -51,7 +51,7 @@ class Kayttaja extends BaseModel {
 
     public static function find($kid) {
         $id = intval($kid);
-        
+
         $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
         $row = $query->fetch();
@@ -78,7 +78,7 @@ class Kayttaja extends BaseModel {
         $row = $query->fetch();
         $this->id = $row['id'];
     }
-    
+
     public function poista() {
         $query = DB::connection()->prepare('DELETE FROM Kayttaja WHERE id = :id');
         $query->execute(array('id' => $this->id));
@@ -133,19 +133,19 @@ class Kayttaja extends BaseModel {
         if (!$this->validate_max_string_length($this->etunimi, 50)) {
             $errors[] = 'Etunimi saa olla enintään 50 merkkiä pitkä!';
         }
-         if (!$this->validate_min_string_length($this->sukunimi, 2)) {
+        if (!$this->validate_min_string_length($this->sukunimi, 2)) {
             $errors[] = 'Sukunimen tulee olla vähintään 2 merkkiä pitkä!';
         }
         if (!$this->validate_max_string_length($this->sukunimi, 50)) {
             $errors[] = 'Sukunimi saa olla enintään 50 merkkiä pitkä!';
         }
-         if (!$this->validate_min_string_length($this->kayttajatunnus, 4)) {
+        if (!$this->validate_min_string_length($this->kayttajatunnus, 4)) {
             $errors[] = 'Käyttäjätunnuksen tulee olla vähintään 4 merkkiä pitkä!';
         }
         if (!$this->validate_max_string_length($this->kayttajatunnus, 20)) {
             $errors[] = 'Käyttäjätunnus saa olla enintään 20 merkkiä pitkä!';
         }
-         if (!$this->validate_min_string_length($this->salasana, 5)) {
+        if (!$this->validate_min_string_length($this->salasana, 5)) {
             $errors[] = 'Salasanan tulee olla vähintään 5 merkkiä pitkä!';
         }
         if (!$this->validate_max_string_length($this->salasana, 16)) {
@@ -165,6 +165,5 @@ class Kayttaja extends BaseModel {
         }
         return $errors;
     }
-    
-    
+
 }

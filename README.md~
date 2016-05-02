@@ -1,5 +1,7 @@
 # Tietokantasovelluksen esittelysivu
 
+(Ohjelmaan ei tarvitse valmiita käyttäjätunnuksia, vaan ne voi koska tahansa luoda itse.)
+
 Yleisiä linkkejä:
 
 * [Linkki sovellukseeni](http://vipohjol.users.cs.helsinki.fi/Tsoha/)
