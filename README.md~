@@ -25,3 +25,12 @@ joihin vanhukset voivat ilmoittautua.
 Vanhukset voivat asettaa profiiliinsa "liikuntarajoitteisuusvaihtoehdon". Kuljetus on kuitenkin
 mahdollinen ainoastaan, jos skohtaamiseen ilmoittautuu vuorokautta aiemmin, jolloin kuljettajat
 voivat aamulla sopia kuljetuksista etukäteen.
+
+if (KayttajaController::get_user_logged_in()->salasana != $this->salasana) {
+            if (!$this->validate_min_string_length($this->salasana, 5)) {
+                $errors[] = 'Salasanan tulee olla vähintään 5 merkkiä pitkä!';
+            }
+            if (!$this->validate_max_string_length($this->salasana, 16)) {
+                $errors[] = 'Salasana saa olla enintään 16 merkkiä pitkä!';
+            }
+        }
