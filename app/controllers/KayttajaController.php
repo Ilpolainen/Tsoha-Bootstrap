@@ -59,7 +59,7 @@ class KayttajaController extends BaseController {
         $kayttajaid = intval($id);
         $kayttaja = Kayttaja::find($id);
         $yllapitaja = (self::get_user_logged_in()->id == 1);
-        if ($kayttajaid==1) {
+        if ($kayttajaid == 1) {
             $yllapitaja = false;
         }
         $kiinnostukset = Kiinnostustagi::findByKayttaja($kayttajaid);
@@ -74,15 +74,12 @@ class KayttajaController extends BaseController {
         self::check_logged_in();
         $id = self::get_user_logged_in()->id;
         $parametrit = $_POST;
-        $uusisalasana = null;
-        $salasana2 = null;
+        $uusisalasana = $parametrit['uusi_salasana'];
+        $salasana2 = $parametrit['salasana2'];
         if ($parametrit['uusi_salasana'] == '' && $parametrit['salasana2'] == '') {
             $uusisalasana = self::get_user_logged_in()->salasana;
             $salasana2 = self::get_user_logged_in()->salasana;
-        } else {
-            $uusisalasana = $parametrit['uusi_salasana'];
         }
-
         $attribuutit = array(
             'id' => $id,
             'etunimi' => $parametrit['etunimi'],
@@ -100,9 +97,10 @@ class KayttajaController extends BaseController {
         $errors = $kayttaja->errors();
         if ($parametrit['salasana'] != self::get_user_logged_in()->salasana) {
             $errors[] = 'Salasanasi ei ole oikea!';
-        }
-        if ($uusisalasana != $salasana2) {
-            $errors[] = 'Salasanan toisinto ei täsmää salasanan kanssa!';
+        } else if ($uusisalasana != $salasana2) {
+            $errors[] = 'Salasanan toisinto ei täsmää uuden salasanan kanssa!';
+        } else {
+            $kayttaja->salasana = $uusisalasana;
         }
 
         if (count($errors) > 0) {
@@ -140,7 +138,8 @@ class KayttajaController extends BaseController {
     }
 
     public static function naytaEtusivu() {
-        View::make('etusivu.html');
+        $kirjautunut = isset($_SESSION['kayttaja']);
+        View::make('etusivu.html', array('checked' => $kirjautunut));
     }
 
 }

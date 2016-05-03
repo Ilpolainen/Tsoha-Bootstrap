@@ -1,25 +1,33 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container tapahtuma-container">
-
     <div class="container">
         <form>
             <div class="form-group">
                 <div class="col-xs-10">
 
                     <h1>Elämän Tarkoitus</h1>
-
-                    <br>
-
-
+                </div>
+            </div>
+        </form>
+    </div>
+    <br>
+</div>
+<br>
+<div class="container tapahtuma-container">
+    <br>
+    <div class="container">
+        <form>
+            <div class="form-group">
+                <div class="col-xs-10">
                     <div class="text" style="font-size: 20px"> 
 
                         Tämä sivusto on tarkoitettu yksinäisille ja syrjäytyneille ihmisille, joiden on vaikea löytää elämäänsä sisältöä. Sivuston kautta on mahdollisuus ottaa yhteyttä muihin yksinäisiin ihmisiin osallistumalla erilaisiin kerhoihin ja tapaamisiin, joiden kautta ihmiset voivat saada jälleen yhteyden yhteiskuntaan ja mikä tärkeintä, kokea olevansa osa jotakin yhteisöä ja mahdollisesti tällä tavoin saada tarkoituksentunteen elämäänsä. 
 
                     </div>
                     <br>
-                    {% if check_user_logged_in %}
-                    
+                    {% if checked %}
+
                     {% else %}
                     <div>
                         <a href="http://vipohjol.users.cs.helsinki.fi/Tsoha/kirjautuminen" class="btn btn-primary">Kirjaudu sisään</a>

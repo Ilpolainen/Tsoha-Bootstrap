@@ -9,16 +9,7 @@ class HelloWorldController extends BaseController {
 
     public static function sandbox() {
         // Testaa koodiasi täällä
-        $tapahtuma = new Tapahtuma(array(
-            'tapahtuman_nimi' => 'd',
-            'lyhytKuvaus' => 'tsum',
-            'pvm' => 't',
-            'kellonaika' => '12:00',
-            'tapahtumapaikka' => 'Boom, boom!'
-        ));
-        $errors = $tapahtuma->errors();
-
-        Kint::dump($errors);
+        Tapahtuman_aihe::poistaKaikki();
     }
 
     public function hello() {

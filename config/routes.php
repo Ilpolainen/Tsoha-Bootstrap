@@ -8,7 +8,10 @@ $routes->get('/etusivu', function() {
     KayttajaController::naytaEtusivu();
 });
 
-
+$routes->get('/sandbox', function() {
+    HelloWorldController::sandbox();
+    
+});
 
 $routes->get('/kirjautuminen', function() {
     KayttajaController::naytaKirjautumislomake();
@@ -18,7 +21,7 @@ $routes->post('/kirjautuminen', function() {
     KayttajaController::handle_login();
 });
 
-$routes->post('/uloskirjautuminen', function() {
+$routes->get('/uloskirjautuminen', function() {
     KayttajaController::kirjauduUlos();
 });
 

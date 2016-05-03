@@ -1,27 +1,41 @@
 #main-container{
-  min-width: 1600px;
-  padding: 10px 25px;
-  margin: 0px auto;
+    min-width: 1600px;
+    padding: 10px 25px;
+    margin: 0px auto;
 }
 
 .navbar .container-fluid{
-  min-width: 1600px;
-  margin: 0px auto;
+    min-width: 1600px;
+    margin: 0px auto;
 }
 
 .kirjautumis-container {
-    background-color: rgba(255, 191, 0, 0.26);
+    background-color: rgba(0, 255, 234, 0.6);
+    border-color: white;
+    border-style: solid;
+    border-width: medium;
 }
 
 .luonti-container {
-    background-color: rgba(0, 255, 234, 0.36);
-     
+    background-color: rgba(0, 255, 234, 0.6);
+     border-color: white;
+    border-style: solid;
+    border-width: medium;
 }
 
 .tapahtuma-container {
-    background-color: rgba(10, 247, 72, 0.41);
+    background-color: rgba(0, 255, 234, 0.6);
+     border-color: white;
+    border-style: solid;
+    border-width: medium;
 }
 
 .profiili-container {
-    background-color: rgba(200, 100, 100, 0.41)
+    background-color: rgba(0, 255, 234, 0.6);
+    
+    border-color: white;
+    border-style: solid;
+    border-width: medium;
+    
+    
 }

@@ -1,6 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
-
+<div class="container luonti-container">
+    <div class="container">
+        <form method="post" action="{{base_path}}/tapahtumanluonti">
+            <div class="form-group">
+                <div class="col-xs-5">
+                    <h2>Luo Tapahtuma:</h2>
+                    <br>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<br>
 <div class="container luonti-container">
     <br>
     <div class="container">
@@ -18,12 +30,6 @@
                     </div>
 
                     {% endif %}
-
-                    <h2>Luo Tapahtuma:</h2>
-
-                   
-                    <br>
-
 
                     <p>
                         <label>Tapahtuman nimi:</label>
@@ -49,28 +55,29 @@
                         </textarea>
                     </p>
                     <p>
-                        <button type="submit" class="btn btn-primary">Luo Tapahtuma</button>
+                        <button type="submit" class="btn btn-success">Luo Tapahtuma</button>
                     </p>
+
                 </div>
                 <div class="form-group">
-                    <br>
-                    <br>
 
                     <div class="col-xs-4">
-                        <p>
-                            <a href="http://vipohjol.users.cs.helsinki.fi/Tsoha/kiinnostuksenluonti" class="btn btn-default">Luo uusi aihe</a>
-                        </p>
+
 
                         <p>
                             <label>Valitse aiheita: </label>
                         </p>
-                        <p><br></p>
+
                         {% for tag in tagit %}
                         <p>
                             <input type="checkbox" name="{{tag.id}}">
                             {{tag.kiinnostus}}
                         </p>
                         {% endfor %}
+                        <br>
+                        <p>
+                            <a href="http://vipohjol.users.cs.helsinki.fi/Tsoha/kiinnostuksenluonti" class="btn btn-primary">Luo uusi aihe</a>
+                        </p>
                     </div>
                 </div>
             </div>

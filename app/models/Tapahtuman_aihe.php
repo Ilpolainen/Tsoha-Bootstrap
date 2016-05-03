@@ -72,13 +72,16 @@ class Tapahtuman_aihe extends BaseModel {
     }
     
     public static function poistaKaikkiTapahtumanAiheet($tapahtumaId) {
-        
-        
         $query = DB::connection()->prepare('DELETE FROM Tapahtuman_aihe WHERE tapahtuma = :tapahtuma');
-        $query->execute(array('tapahtuma' => $tapahtumaId));
-        
+        $query->execute(array('tapahtuma' => $tapahtumaId));      
     }
     
+    public static function poistaKaikki() {
+        $query=DB::connection()->prepare('DELETE FROM Tapahtuman_aihe WHERE 1 = 1');
+        $query->execute();
+    }
+
+
     public function poistaArvoilla() {
         $query = DB::connection()->prepare('DELETE FROM Tapahtuman_aihe WHERE tapahtuma = :tapahtuma AND aihe = :aihe');
         $query->execute(array('tapahtuma' => $this->tapahtuma, 'aihe' => $this->aihe));

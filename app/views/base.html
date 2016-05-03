@@ -4,7 +4,6 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <title>
             {% block title %}
             Tietokantasovellus
@@ -21,6 +20,13 @@
     </head>
 
     <body class="container-fluid">
+
+        <style> 
+            body {
+                background-image: url("aaa.jpg");
+                background-color: #60b0c9;
+            }
+        </style>
 
         <nav class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
@@ -39,7 +45,7 @@
                 <div class="collapse navbar-collapse" id="navigation">
                     <ul class="nav navbar-nav">
                         <!-- Navigaation linkit -->
-                        <li><a href="{{base_path}}/tietokantayhteys">Tietokantayhteys</a></li>
+                        
                         {% if user_logged_in %}
                         <li><a href="{{base_path}}/profiilinmuokkaus">Muokkaa profiilia</a></li>
                         <li><a href="{{base_path}}/omasivu">Omasivu</a></li>
@@ -48,20 +54,16 @@
                         <li><a href="{{base_path}}/kiinnostuksenluonti">Luo kiinnostus</a></li>
                         <li><a href="{{base_path}}/tapahtumanluonti">Luo tapahtuma</a></li>
                         <li><a href="{{base_path}}/kayttajienlistaus">Käyttäjät</a></li>
+                        <li><a href="{{base_path}}/uloskirjautuminen">Kirjaudu ulos</a></li>
                         {% else %}
                         <li><a href="{{base_path}}/kirjautuminen">Kirjaudu sisään</a></li>
                         <li><a href="{{base_path}}/tilinluonti">Luo tili</a></li>
-                        {% endif %}
+                        {% endif %}                            
                     </ul>
-                    {% if user_logged_in %}
-                    <form class="navbar-form navbar-right" method="post" action="{{base_path}}/uloskirjautuminen">
-                        <button type="submit" class="btn-default">Kirjaudu ulos</button>
-                    </form>
-                    {% endif %}
+
                 </div>
             </div>
         </nav>
-
         <div>
             <!-- Dynaaminen sisältö tulee tähän -->
             {% block content %}{% endblock %}

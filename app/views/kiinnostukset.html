@@ -1,7 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
 
+<div class="container kirjautumis-container">
+    <div class="container" >
 
+
+        <form method="post" action="{{base_path}}/paivitakiinnostukset">
+            <div class="form-group">
+                <div class="col-xs-8">
+                    <h2>Tällä hetkellä olen kiinnostunut näistä teemoista: </h2>
+                    <br>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<br>
 <div class="container kirjautumis-container">
     <br>
 
@@ -18,9 +32,6 @@
                         <a href="http://vipohjol.users.cs.helsinki.fi/Tsoha/kiinnostuksenluonti" class="btn btn-primary">Luo uusi kiinnostuksenkohde</a>
                     </p>
                     <p><br></p>
-                    <p>
-                        <label>Tällä hetkellä olen kiinnostunut näistä teemoista: </label>
-                    </p>
                     <p><br></p>
                     {% for tag in tagit %}
                     <p>

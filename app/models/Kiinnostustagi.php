@@ -90,8 +90,9 @@ class Kiinnostustagi extends BaseModel {
         $tat = Tapahtuman_aihe::findAllByTapahtuma($id);
         $tagit = array();
         foreach ($tat as $ta) {
+            $kiinnostus = self::find($ta->aihe);
+            
             $tagit[] = new Kiinnostustagi(array(
-                $kiinnostus = self::find($ta->aihe),
                 'id' => $kiinnostus->id,
                 'kiinnostus' => $kiinnostus->kiinnostus));
         }
