@@ -21,7 +21,7 @@ class Tapahtuman_aiheController extends BaseController {
     public static function paivitaAiheet($tapahtumaId) {
         $id = intval($tapahtumaId);
         $checkBoxLista = $_POST;
-        Tapahtuman_aihe::poistaKaikkiTapahtumanAiheet($id);
+        Tapahtuman_aihe::poistaKaikkiTapahtumanIdlla($id);
         foreach ($checkBoxLista as $key => $value) {
             if (is_numeric($key)) {
                 $ta = new Tapahtuman_aihe(array('tapahtuma' => $id, 'aihe' => $key));

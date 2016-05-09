@@ -8,11 +8,6 @@ $routes->get('/etusivu', function() {
     KayttajaController::naytaEtusivu();
 });
 
-$routes->get('/sandbox', function() {
-    HelloWorldController::sandbox();
-    
-});
-
 $routes->get('/kirjautuminen', function() {
     KayttajaController::naytaKirjautumislomake();
 });
@@ -39,10 +34,6 @@ $routes->post('/tilinpoisto/:id', function($id) {
 
 $routes->post('/tilinpoistoon/:id', function($id) {
     KayttajaController::poistetaankoTili($id);
-});
-
-$routes->get('/omasivu', function() {
-    HelloWorldController::naytaomasivu();
 });
 
 $routes->get('/profiilinmuokkaus/', function() {

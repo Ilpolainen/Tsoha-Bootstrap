@@ -79,6 +79,11 @@ class Tapahtuma extends BaseModel {
     }
 
     public function poista() {
+        $osallistumiset = Osallistuminen::findAllByTapahtuma($this->id);
+        foreach ($osallistumiset as $os) {
+            $os->poista();
+        }
+        Tapahtuman_aihe::poistaKaikkiTapahtumanIdlla($this->id);
         $query = DB::connection()->prepare('DELETE FROM Tapahtuma WHERE id = :id');
         $query->execute(array('id' => $this->id));
     }
@@ -92,6 +97,11 @@ class Tapahtuma extends BaseModel {
             $errors[] = 'Tapahtumannimi saa olla enintään 50 merkkiä pitkä';
         }
         return $errors;
+    }
+    
+    public static function poistaLuojanTapahtumat($kayttajaId) {
+        $query = DB::connection()->prepare('DELETE FROM Tapahtuma WHERE tapahtuman_luoja = :kayttajaId');
+        $query->execute(array('kayttajaId' => $kayttajaId));
     }
 
     public function validatePvm() {

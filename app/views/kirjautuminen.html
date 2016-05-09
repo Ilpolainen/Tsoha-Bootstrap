@@ -12,11 +12,14 @@
         <form method="post" action="{{base_path}}/kirjautuminen">
             <div class="form-group">
                 <div class="col-xs-3">
+                    {% if error %}
                     <div class="alert-danger">
                         <ul>
                             <li>{{error}}</li>
                         </ul>
                     </div>
+                    {% endif %}
+                    
                     <p>
                     <h2>Kirjaudu Sisään</h2>
                     </p>

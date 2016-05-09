@@ -12,27 +12,27 @@
  * @author vipohjol
  */
 class Tapahtuman_aihe extends BaseModel {
-    
+
     public $tapahtuma, $aihe;
-    
+
     public function __construct($attributes) {
         parent::__construct($attributes);
     }
-    
+
     public static function findAll() {
         $query = DB::connection()->prepare('SELECT * FROM Tapahtuman_aihe');
         $query->execute();
-     
+
         $rows = $query->fetchAll();
-        
+
         $aiheet = array();
         foreach ($rows as $row) {
             $aiheet[] = new Tapahtuman_aihe(array('tapahtuma' => $rows['tapahtuma'], 'aihe' => $rows['aihe']));
         }
         return $aiheet;
     }
-    
-     public static function findAllByTapahtuma($id) {          
+
+    public static function findAllByTapahtuma($id) {
         $query = DB::connection()->prepare("SELECT * FROM Tapahtuman_aihe WHERE tapahtuma = :tapahtuma");
         $query->execute(array('tapahtuma' => $id));
         $rows = $query->fetchAll();
@@ -54,7 +54,7 @@ class Tapahtuman_aihe extends BaseModel {
         }
         return $tapahtuman_aiheet;
     }
-    
+
     public function onJoOlemassa() {
         $query = DB::connection()->prepare('SELECT * FROM Tapahtuman_aihe WHERE tapahtuma = :tapahtuma AND aihe = :aihe');
         $query->execute(array("tapahtuma" => $this->tapahtuma, "aihe" => $this->aihe));
@@ -64,28 +64,29 @@ class Tapahtuman_aihe extends BaseModel {
         }
         return true;
     }
-    
+
     public function tallenna() {
         $query = DB::connection()->prepare('INSERT INTO Tapahtuman_aihe (tapahtuma, aihe) VALUES (:tapahtuma, :aihe) RETURNING id');
         $query->execute(array('tapahtuma' => $this->tapahtuma, 'aihe' => $this->aihe));
         $this->id = $query->fetch();
     }
-    
-    public static function poistaKaikkiTapahtumanAiheet($tapahtumaId) {
+
+    public static function poistaKaikkiTapahtumanIdlla($tapahtumaId) {
         $query = DB::connection()->prepare('DELETE FROM Tapahtuman_aihe WHERE tapahtuma = :tapahtuma');
-        $query->execute(array('tapahtuma' => $tapahtumaId));      
+        $query->execute(array('tapahtuma' => $tapahtumaId));
     }
-    
+
     public static function poistaKaikki() {
-        $query=DB::connection()->prepare('DELETE FROM Tapahtuman_aihe WHERE 1 = 1');
+        $query = DB::connection()->prepare('DELETE FROM Tapahtuman_aihe WHERE 1 = 1');
         $query->execute();
     }
 
+    
 
     public function poistaArvoilla() {
         $query = DB::connection()->prepare('DELETE FROM Tapahtuman_aihe WHERE tapahtuma = :tapahtuma AND aihe = :aihe');
         $query->execute(array('tapahtuma' => $this->tapahtuma, 'aihe' => $this->aihe));
     }
-    
+
     //put your code here
 }

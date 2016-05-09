@@ -80,6 +80,15 @@ class Kayttaja extends BaseModel {
     }
 
     public function poista() {
+        $kookoot = Kayttajan_kiinnostus::findByKayttaja($this->id);
+        foreach ($kookoot as $kk) {
+            $kk->poistaArvoilla();
+        }
+        $osallistumiset = Osallistuminen::findAllByKayttaja($this->id);
+        foreach ($osallistumiset as $os) {
+            $os->poista();
+        }
+        Tapahtuma::poistaLuojanTapahtumat($this->id);
         $query = DB::connection()->prepare('DELETE FROM Kayttaja WHERE id = :id');
         $query->execute(array('id' => $this->id));
     }
